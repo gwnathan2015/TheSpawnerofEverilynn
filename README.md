@@ -58,7 +58,7 @@ the init.lua file HAS to tell the game where every file in the code section is, 
 
 there are three types of mods, content mods witch only add maps using vanilla or modded tiles, and they dont need an assets folder, but everything else remains the same, addition mods, witch have evrything as shown, and feature mods, witch dont add maps or tiles, but can add brand new features, and even help loading other mods like an API core thingy in minecraft modding. please note this is planned theoreticals and wont actually work without a lot of rwriting the game engine. we hope to be there by the time were at our last beta or first release (if that ever comes)
 
-press R to respawn if you ever need that.
+press R to respawn if you ever need that. also pressing ESC closes the game
 
 LORE AND STORY
 story game about mythical quests and creatures

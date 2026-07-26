@@ -8,9 +8,9 @@ end
 
 sprites = {}
 
-require ("map")
+require ("map.map")
 local characters = require ("characters")
-require("mapreader")
+require("map.mapreader")
 
 game_map1 = read_map("map1.json")
 

@@ -9,9 +9,10 @@ storygame is the only thing worth seeing, it is a fantasy coding project for me 
 | *PA-1.8 |NA             |refactor of character positioning and movement system                   |
 | *PA-1.8.1|Github update |addition of the github repository, and minor changes to the version file|
 | *PA-1.8.2| Health update|addition of characters.coordinates and characters.stats                 |
-| *PA-1.8.3| map overhual| not yet released, adds new tiles and changes map completely             |
-| *PA-1.8.4| damage update|not yet released, so that damage works                                  |
+| *PA-1.8.3| health update 2| finishes the health update                                           |
+| *PA-1.8.4| health update 3|adds more to the health update. not yet released                      |
 | *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                 |
+| *PA-1.8.6| Map expansion | no new tiles, but map expansion ans changeing.                        |
  
 nothing much to see here, most features arent here yet, although there is a wizard (supposed to sell potions when the game is done), a swordsman(follows the player and supposed to help the player defeat dwarves) and a working movement system where the bottom half of trees and NPCs cant be moved into. theres a big glitch we cant fix where a certain flower makes the player and npc characters dissapear. to see future game updates go into storygame and see the MD file for it (not readme.md)
 
@@ -56,6 +57,8 @@ return {
 the init.lua file HAS to tell the game where every file in the code section is, because in reality, in the code folder, you can put any folder path you want, as long as init.lua tells the game where the mdos files are. the maps have to have the mods name in it with underscores replacing spaces. the assets folder has to be organised exactly like is shown, or else the game wont laod them properly, and you will be stuck with broken maps.
 
 there are three types of mods, content mods witch only add maps using vanilla or modded tiles, and they dont need an assets folder, but everything else remains the same, addition mods, witch have evrything as shown, and feature mods, witch dont add maps or tiles, but can add brand new features, and even help loading other mods like an API core thingy in minecraft modding. please note this is planned theoreticals and wont actually work without a lot of rwriting the game engine. we hope to be there by the time were at our last beta or first release (if that ever comes)
+
+press R to respawn if you ever need that.
 
 LORE AND STORY
 story game about mythical quests and creatures

@@ -2,9 +2,9 @@
 {
     "game_map": [
         "G   |G   |Gf  |G   |P   |G   |G   |G   |G   |Gf  |Gf  |P   |G   ",
-        "GU  |G   |G   |Gf  |P   |G   |GU  |G   |Gf  |P   |P   |P   |P   ",
+        "GU  |G   |G   |Gf  |P   |G   |GU  |G   |Gf  |P   |G   |P   |G   ",
         "GT  |Gf  |P   |Gf  |G   |G   |GT  |Gf  |G   |P   |P   |G   |G   ",
-        "P   |P   |G   |Gf  |P   |S   |S   |G   |Gf  |G   |Gf  |G   |G   ",
+        "P   |P   |G   |Gf  |G   |S   |S   |G   |Gf  |G   |Gf  |G   |G   ",
         "P   |Gf  |P   |P   |G   |GF  |GF  |G   |GF  |GF  |G   |G   |G   ",
         "GU  |G   |GF  |GF  |G   |S   |G   |G   |GF  |G   |G   |GF  |GF  ",
         "GT  |GF  |G   |G   |GF  |G   |G   |GF  |GF  |G   |GF  |G   |GF  "

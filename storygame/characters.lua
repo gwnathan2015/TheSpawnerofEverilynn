@@ -34,6 +34,7 @@ function characters.CharacterStats:new(max_health, current_health)
         max_health = max_health,
         current_health = current_health,
         morale_level = 0,
+        death_status = nil,
     }
     setmetatable(new_object, self)
     new_object.__index = characters.CharacterStats
@@ -42,6 +43,11 @@ end
 
 function characters.CharacterStats:deal_damage(amount)
     self.current_health = self.current_health - amount
+
+    if self.current_health < 0 then
+        self.current_health = 0
+        self.death_status = "death by spike"
+    end
 end
 
 -- Any kind of character in the story game, e.g. the main player
@@ -69,13 +75,20 @@ function characters.Character:new(name, sprite, game_map, stats, x, y)
         name = name, 
         game_map = game_map,
         stats = stats,
-        x = x,
-        y = y,
+        x = x, start_x = x,
+        y = y, start_y = y
     }
     setmetatable(new_object, self)
     new_object.__index = characters.Character
     table.insert(characters.Character.all_characters, new_object)
     return new_object
+end
+
+function characters.Character:respawn()
+    self.x = self.start_x
+    self.y = self.start_y
+    self.stats.death_status = nil
+    self.stats.current_health = self.stats.max_health
 end
 
 -- determines character health
@@ -111,6 +124,9 @@ function characters.Character:move(step_in_x, step_in_y)
         end
     end
     
+    if self.stats.death_status ~= nil then
+        return false
+    end
 
     local future_cell = self.game_map[future_y][future_x]
     for index, sprite_num in pairs(future_cell.u) do

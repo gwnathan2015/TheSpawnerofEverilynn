@@ -1,4 +1,4 @@
-require("mapreader")
+require("map.mapreader")
 
 local maps = {}
 

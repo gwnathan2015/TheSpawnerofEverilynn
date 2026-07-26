@@ -12,7 +12,7 @@ require ("map.map")
 local characters = require ("characters")
 require("map.mapreader")
 
-game_map1 = read_map("map1.json")
+game_map1 = read_map("ASSETS/maps/map1.json")
 
 characters.main_character = characters.Character:new(
     "player", 
@@ -82,21 +82,27 @@ function love.load()
         sprites[i + 1000] = love.graphics.newImage(filename)
     end
 
-    love.window.setTitle("Storygame Pre-Alpha-1.8.2")
+    love.window.setTitle("Storygame Pre-Alpha-1.8.3")
     love.window.setMode(800, 600, {resizable=true, vsync=0, minwidth=400, minheight=300})
 end
 
 local function deal_environmental_damage()
-    local the_character = characters.main_character
-    local pos = the_character:pos()
-    local tile = game_map1[pos.y][pos.x]
-    if tile.u == SPIKE then
-        the_character.stats:deal_damage(2)
+    for i, the_character in pairs(characters.Character.all_characters) do
+        local pos = the_character:pos()
+        local tile = game_map1[pos.y][pos.x]
+        if tile.u[1] == SPIKE then
+            the_character.stats:deal_damage(2)
+        end
     end
 end
 
+local function handle_status_updates()
+    local the_character = characters.main_character
 
-time_total = 0
+    
+end
+
+local time_total = 0
 function love.update(step_in_time)
    time_total = time_total + step_in_time
    if time_total >= 1 then
@@ -104,6 +110,7 @@ function love.update(step_in_time)
       move_swordsman()
       deal_environmental_damage()
    end
+   handle_status_updates()
 end
 
 function love.draw()
@@ -112,21 +119,17 @@ function love.draw()
     characters.draw_characters(sprites)
     draw_map_overlay(game_map1, sprites)
     local max_x = love.graphics.getWidth()
-    local max_health = characters.main_character.stats.max_health / 10
-    local max_health_str = string.rep( '*', max_health )
-    love.graphics.setColor({1,1,1,1})
-    love.graphics.print(max_health_str, max_x - 250, 30)
 
-    local health = characters.main_character.stats.current_health / 10
-    local health_str = string.rep( '*', health )
-    love.graphics.setColor({1,0,0,1})
-    love.graphics.print(health_str, max_x - 250, 30)
-    love.graphics.setColor({1,1,1,1})
+local health = characters.main_character.stats.current_health
+local max_health = characters.main_character.stats.max_health
+local health_str = string.format( "%d/%d", health, max_health )
+love.graphics.setColor({0.4,0.1,0.2,1})
+love.graphics.print(health_str, max_x - 250, 30)
 
-    --print(characters.main_character.stats.current_health)
+love.graphics.setColor({1,1,1,1})
+
 end
 
---- 85 new main character for now
 
 
 function love.keypressed(key, scancode, isrepeat)
@@ -140,6 +143,8 @@ function love.keypressed(key, scancode, isrepeat)
         characters.main_character:move(0, 1)
     elseif key == "d" then
         characters.main_character:move(1, 0)
+    elseif key == "r" then 
+        characters.main_character:respawn()
     end
 end
 

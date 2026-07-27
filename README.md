@@ -1,4 +1,4 @@
-storygame is the only thing worth seeing, it is a fantasy coding project for me learning lua.
+storygame requires a machine that can run lua, lua itself, and love 11.5 or later.
 
 | Version |name           | Notes                                                                  |
 |---------|---------------|------------------------------------------------------------------------|
@@ -14,6 +14,7 @@ storygame is the only thing worth seeing, it is a fantasy coding project for me 
 | *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                 |
  
 nothing much to see here, most features arent here yet, although there is a wizard (supposed to sell potions when the game is done), a swordsman(follows the player and supposed to help the player defeat dwarves) and a working movement system where the bottom half of trees and NPCs cant be moved into. theres a big glitch we cant fix where a certain flower makes the player and npc characters dissapear. to see future game updates go into storygame and see the MD file for it (not readme.md)
+we got some nice music (that doesnt play in game yet) from the web. for more info about that go to the credits md file in the music folder.
 
 for the future, when modding can be implemented (maybe it will) mods will look like this:
 
@@ -48,6 +49,8 @@ return {
         characters = "assets/characters/",
         items = "assets/items/",
         ui = "assets/ui/"
+        music = "assets/music"
+        sounds = "assets/sounds"
     },
     dependencies = {},
     load_priority = 1
@@ -76,7 +79,7 @@ in 245 CE of the planet everliynn, the lone dwarve declares the empire of dwarve
 
 now, in 256 CE of the planet everliynn, you alone can plan and manage to defeat the dwarven king, starting from the last free, big city, fort city, you must free the world of the dwarven empire, and you are not alone in your fights, you have the wizard, who will gladly sell you your potions in return for coins gained by defeating dwarves, the farmer, who will gladly sell you food to heal your health after a great fight with dwarves, and your most loyal ally, the swordsman, who pledged to protect and help you in combat. the reason for this is unkown, and what the spawner is is unknown, however the swordsman says that he thinks is an amalgamation of the mythical "creator of the world"s powers after he is said to have been tricked into loosing his powers by a small group of kings, seeking power for themselves, however the power never managed to get to those kings, and eventualy over time became deep in the earth and compacted into the spawner, only for it to be found by that lone dwarve when he was mining.
 
-the goals and intent of the dwarve remain unknown, except for one thing that an elven spy in the dwarven court said, he said "the dwarven king said'KILL THEM ALL, THE ELVES, THE HUMANS, THE ANIMALS, KILL THEM, ALL, GIVE ME ALL THEIR WEALTH, AND GROW OUR POPULATION! SOON WE SHAL MARCH ON FORT CITY" ever since then, fort city and everless have been getting attacked, and while fort city created an elaborate wall and canal thing, everless grew a large barrier of trees, stone, dirt, grass, and water
+the goals and intent of the dwarve remain unknown, except for one thing that an elven spy in the dwarven court said, he said "the dwarven king said'KILL THEM ALL, THE ELVES, THE HUMANS, THE ANIMALS, KILL THEM, ALL, GIVE ME ALL THEIR WEALTH, AND GROW OUR POPULATION! SOON WE SHALl MARCH ON FORT CITY" ever since then, fort city and everless have been getting attacked, and while fort city created an elaborate wall and canal thing, everless grew a large barrier of trees, stone, dirt, grass, and water
 
 fort city and everless are very different, first of all everless is the last remaining major elven settlement, its more down to earth, and many houses are made out of large mushrooms or trees(typical in where they live) and their defense systems agains dwarves use grasses and mosses that are poisonous to dwarves but not humans, the two cities are far apart, but they both jointly protect the trade between each other, sending millitary with traders to protect them and make sure the trade gets to the other side of the trade corridor
 

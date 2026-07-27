@@ -7,8 +7,8 @@ requires a machine that can run Lua and love 11.5 or later.
 2. make sure love 11.5 is properly set up
 3. install the game folder
 4. open powershell or a windows command line runner
-5. type start-process 'path-to-love.exe here' storygame
-6. play!
+5. type start-process 'path-to-love.exe here' TheSpawnerofEverilynn  (note path-to-love.exe needs to be replaced with the FULL path from the root system file c:/ all the way to where love.exe is installed. if on windows it should be right in c:/programfiles (x86)/love.exe)
+7. play!
 
 ## VERSIONS
 

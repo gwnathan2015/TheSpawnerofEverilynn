@@ -1,6 +1,6 @@
-The Spawner of Everliynn requires a machine that can run Lua and love 11.5 or later.
+#The Spawner of Everliynn requires a machine that can run Lua and love 11.5 or later.
 
-INSTALLATION.
+##INSTALLATION.
 
 1. install love 11.5
 2. make sure love 11.5 is properly set up
@@ -9,7 +9,7 @@ INSTALLATION.
 5. type start-process 'path-to-love.exe here' storygame
 6. play!
 
-VERSIONS
+##VERSIONS
 
 | Version |name           | Notes                                                                  |
 |---------|---------------|------------------------------------------------------------------------|
@@ -25,13 +25,16 @@ VERSIONS
 | *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                 |
 | *PA-1.8.6| Map expansion | no new tiles, but map expansion.                                      |
 
-Features
+##Features
  
-nothing much to see here, most features arent here yet, although there is a wizard (supposed to sell potions when the game is done), a swordsman(follows the player and supposed to help the player defeat dwarves) and a working movement system where the bottom half of trees and NPCs cant be moved into. theres a big glitch we cant fix where a certain flower makes the player and npc characters dissapear. to see future game updates go into storygame and see the MD file for it (not readme.md)
-we got some nice music (that doesnt play in game yet) from the web. for more info about that go to the credits md file in the music folder.
+nothing much to see here, most features aren't here yet, although there is a wizard (supposed to sell potions when the game is done), a swordsman (follows the player and supposed to help the player defeat dwarves) and a working movement system where the bottom half of trees and NPCs can't be moved into. to see future game updates go into version.md.
+we got some nice music (that doesn't play in game yet) from the web. for more info about that go to the credits md file in the music folder.
 press R to respawn if you ever need that. also pressing ESC closes the game
 
-PLANNED MODDING
+<img width="800" height="637" alt="Screenshot 2026-07-27 110459" src="https://github.com/user-attachments/assets/68067903-6cc7-474b-be3b-91058840809c" />
+
+
+##PLANNED MODDING
 
 for the future, when modding can be implemented (maybe it will) mods will look like this:
 
@@ -79,7 +82,7 @@ there are three types of mods, content mods witch only add maps using vanilla or
 
 
 
-LORE AND STORY
+##LORE AND STORY
 story game about mythical quests and creatures
 
 |character | faction|

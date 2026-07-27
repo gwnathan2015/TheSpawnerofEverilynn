@@ -10,7 +10,7 @@ sprites = {}
 
 require ("map.map")
 local characters = require ("characters")
-require("map.mapreader")
+require("Tmap.mapreader")
 
 game_map1 = read_map("ASSETS/maps/map1.json")
 
@@ -82,7 +82,7 @@ function love.load()
         sprites[i + 1000] = love.graphics.newImage(filename)
     end
 
-    love.window.setTitle("Storygame Pre-Alpha-1.8.3")
+    love.window.setTitle("Spawner of Everilynn Pre-Alpha-1.8.3")
     love.window.setMode(800, 600, {resizable=true, vsync=0, minwidth=400, minheight=300})
 end
 

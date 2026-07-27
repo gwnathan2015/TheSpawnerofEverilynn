@@ -34,6 +34,9 @@ press R to respawn if you ever need that. also pressing ESC closes the game
 
 <img width="800" height="637" alt="Screenshot 2026-07-27 110459" src="https://github.com/user-attachments/assets/68067903-6cc7-474b-be3b-91058840809c" />
 
+<img width="524" height="506" alt="image" src="https://github.com/user-attachments/assets/abcfebed-3cca-444a-bd17-f9e821db5908" />
+
+
 
 ## PLANNED MODDING
 

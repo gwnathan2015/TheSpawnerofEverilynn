@@ -1,4 +1,16 @@
-The Spawner of Everliynn requires a machine that can run Lua and love 11.5 or later.
+# The Spawner of Everliynn 
+requires a machine that can run Lua and love 11.5 or later.
+
+## INSTALLATION.
+
+1. install love 11.5
+2. make sure love 11.5 is properly set up
+3. install the game folder
+4. open powershell or a windows command line runner
+5. type start-process 'path-to-love.exe here' storygame
+6. play!
+
+## VERSIONS
 
 | Version |name           | Notes                                                                  |
 |---------|---------------|------------------------------------------------------------------------|
@@ -13,9 +25,20 @@ The Spawner of Everliynn requires a machine that can run Lua and love 11.5 or la
 | *PA-1.8.4| health update 3|adds more to the health update. not yet released. also adds music and title screen|
 | *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                 |
 | *PA-1.8.6| Map expansion | no new tiles, but map expansion.                                      |
+
+## Features
  
-nothing much to see here, most features arent here yet, although there is a wizard (supposed to sell potions when the game is done), a swordsman(follows the player and supposed to help the player defeat dwarves) and a working movement system where the bottom half of trees and NPCs cant be moved into. theres a big glitch we cant fix where a certain flower makes the player and npc characters dissapear. to see future game updates go into storygame and see the MD file for it (not readme.md)
-we got some nice music (that doesnt play in game yet) from the web. for more info about that go to the credits md file in the music folder.
+nothing much to see here, most features aren't here yet, although there is a wizard (supposed to sell potions when the game is done), a swordsman (follows the player and supposed to help the player defeat dwarves) and a working movement system where the bottom half of trees and NPCs can't be moved into. to see future game updates go into version.md.
+we got some nice music (that doesn't play in game yet) from the web. for more info about that go to the credits md file in the music folder.
+press R to respawn if you ever need that. also pressing ESC closes the game
+
+<img width="800" height="637" alt="Screenshot 2026-07-27 110459" src="https://github.com/user-attachments/assets/68067903-6cc7-474b-be3b-91058840809c" />
+
+<img width="524" height="506" alt="image" src="https://github.com/user-attachments/assets/abcfebed-3cca-444a-bd17-f9e821db5908" />
+
+
+
+## PLANNED MODDING
 
 for the future, when modding can be implemented (maybe it will) mods will look like this:
 
@@ -61,9 +84,9 @@ the init.lua file HAS to tell the game where every file in the code section is, 
 
 there are three types of mods, content mods witch only add maps using vanilla or modded tiles, and they don't need an assets folder, but everything else remains the same, addition mods, which have everything as shown, and feature mods, witch don't add maps or tiles, but can add brand new features, and even help loading other mods like an API core thingy in Minecraft modding. please note this is planned theoretical and won't actually work without a lot of rewriting the game engine. we hope to be there by the time were at our last beta or first release (if that ever comes)
 
-press R to respawn if you ever need that. also pressing ESC closes the game
 
-LORE AND STORY
+
+## LORE AND STORY
 story game about mythical quests and creatures
 
 |character | faction|

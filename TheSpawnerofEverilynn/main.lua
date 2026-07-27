@@ -10,13 +10,13 @@ sprites = {}
 
 require ("map.map")
 local characters = require ("characters")
-require("Tmap.mapreader")
+require("map.mapreader")
 
 game_map1 = read_map("ASSETS/maps/map1.json")
 
 characters.main_character = characters.Character:new(
     "player", 
-    1085, 
+    1098, 
     game_map1, 
     characters.CharacterStats:new(100),
     2,
@@ -25,7 +25,7 @@ characters.main_character = characters.Character:new(
 
 characters.farmer = characters.Character:new(
     "farmer", 
-    1098, 
+    1085, 
     game_map1,
     characters.CharacterStats:new(100),
     9,
@@ -84,6 +84,9 @@ function love.load()
 
     love.window.setTitle("Spawner of Everilynn Pre-Alpha-1.8.3")
     love.window.setMode(800, 600, {resizable=true, vsync=0, minwidth=400, minheight=300})
+
+    local img = love.image.newImageData("icon.png")
+    love.window.setIcon(img)
 end
 
 local function deal_environmental_damage()

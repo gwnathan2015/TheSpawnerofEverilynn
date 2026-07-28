@@ -12,19 +12,20 @@ requires a machine that can run Lua and love 11.5 or later.
 
 ## VERSIONS
 
-| Version |name           | Notes                                                                  |
-|---------|---------------|------------------------------------------------------------------------|
-| *PA-1.4 |NA             |adding characters.lua                                                   |
-| *PA-1.5 |refactor pt. 1 | refactoring characters.lua                                             |
-| *PA-1.6 |refactor pt. 2 | refactoring map.lua and characters.lua                                 |
-| *PA-1.7 |refactor pt. 3 | refactoring characters.lua                                             |
-| *PA-1.8 |NA             |refactor of character positioning and movement system                   |
-| *PA-1.8.1|Github update |addition of the github repository, and minor changes to the version file|
-| *PA-1.8.2| Health update|addition of characters.coordinates and characters.stats                 |
-| *PA-1.8.3| health update 2| finishes the health update                                           |
-| *PA-1.8.4| health update 3|adds more to the health update. not yet released. also adds music and title screen|
-| *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                 |
-| *PA-1.8.6| Map expansion | no new tiles, but map expansion.                                      |
+| Version |name           | Notes                                                                              | Codename           |
+|---------|---------------|------------------------------------------------------------------------------------| none               |
+| *PA-1.4 |NA             |adding characters.lua                                                               |none                |
+| *PA-1.5 |refactor pt. 1 | refactoring characters.lua                                                         |none                |
+| *PA-1.6 |refactor pt. 2 | refactoring map.lua and characters.lua                                             |none                |
+| *PA-1.7 |refactor pt. 3 | refactoring characters.lua                                                         |none                |
+| *PA-1.8 |NA             |refactor of character positioning and movement system                               |cavern              |
+| *PA-1.8.1|Github update |addition of the github repository, and minor changes to the version file            |cavern              |
+| *PA-1.8.2| Health update|addition of characters.coordinates and characters.stats                             |cavern              |
+| *PA-1.8.3| health update 2| finishes the health update                                                       |cavern              |
+| *PA-1.8.4| health update 3|adds more to the health update. not yet released. also adds music and title screen| cavern             |
+| *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                             |cavern              |
+| *PA-1.8.6| Map expansion | no new tiles, but map expansion.                                                  |crystal             |
+| *PA-1.9.0| TBA          | TBA                                                                                |crystal             |
 
 ## Features
  

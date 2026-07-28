@@ -13,7 +13,7 @@ requires a machine that can run Lua and love 11.5 or later.
 ## VERSIONS
 
 | Version |name           | Notes                                                                              | Codename           |
-|---------|---------------|------------------------------------------------------------------------------------| none               |
+|---------|---------------|------------------------------------------------------------------------------------|--------------------|
 | *PA-1.4 |NA             |adding characters.lua                                                               |none                |
 | *PA-1.5 |refactor pt. 1 | refactoring characters.lua                                                         |none                |
 | *PA-1.6 |refactor pt. 2 | refactoring map.lua and characters.lua                                             |none                |

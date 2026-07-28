@@ -28,6 +28,10 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-1.9.0| TBA          | TBA                                                                                |crystal             |
 | *PA-1.9.1| TBA | TBA                                                                                         | crystal            |
 | *PA-1.9.2| TBA| TBA| crystal |
+| *PA-1.9.3| TBA| TBA| crystal |
+| *PA-1.9.4| TBA| TBA| crystal|
+| *PA-1.9.5| TBA| TBA| crystal|
+| *PA-2.0| TBA| TBA| fort machine|
 
 ## Features
  

@@ -25,13 +25,14 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-1.8.4| health update 3|adds more to the health update. not yet released. also adds music and title screen| cavern             |
 | *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                             |cavern              |
 | *PA-1.8.6| Map expansion | no new tiles, but map expansion.                                                  |crystal             |
-| *PA-1.9.0| TBA          | TBA                                                                                |crystal             |
-| *PA-1.9.1| TBA | TBA                                                                                         | crystal            |
-| *PA-1.9.2| TBA| TBA| crystal |
-| *PA-1.9.3| TBA| TBA| crystal |
+| *PA-1.9.0| UI update| finishes UI |crystal|
+| *PA-1.9.1| TBA| TBA| crystal|
+| *PA-1.9.2| TBA| TBA| crystal|
+| *PA-1.9.3| TBA| TBA| crystal|
 | *PA-1.9.4| TBA| TBA| crystal|
 | *PA-1.9.5| TBA| TBA| crystal|
 | *PA-2.0| TBA| TBA| fort machine|
+| *PA-2.1| TBA| TBA| fort machine|
 
 ## Features
  

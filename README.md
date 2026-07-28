@@ -45,6 +45,7 @@ press R to respawn if you ever need that. also pressing ESC closes the game
 
 for the future, when modding can be implemented (maybe it will) mods will look like this:
 
+'''
 mods/
     dwarven_expansion_mod/
         dwarven_expansion_mod info.lua
@@ -61,9 +62,11 @@ mods/
             npcs.lua
             items.lua
             init.lua
+'''
 
 the info.lua file for each mod will say basic info like:
 
+'''
 return {
     name = "Dwarven Expansion Mod",
     version = "1.0",
@@ -82,6 +85,7 @@ return {
     dependencies = {},
     load_priority = 1
 }
+'''
 
 the init.lua file HAS to tell the game where every file in the code section is, because in reality, in the code folder, you can put any folder path you want, as long as init.lua tells the game where the mods files are. the maps have to have the mods name in it with underscores replacing spaces. the assets folder has to be organized exactly like is shown, or else the game wont load them properly, and you will be stuck with broken maps.
 

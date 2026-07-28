@@ -26,6 +26,8 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                             |cavern              |
 | *PA-1.8.6| Map expansion | no new tiles, but map expansion.                                                  |crystal             |
 | *PA-1.9.0| TBA          | TBA                                                                                |crystal             |
+| *PA-1.9.1| TBA | TBA                                                                                         | crystal            |
+| *PA-1.9.2| TBA| TBA| crystal |
 
 ## Features
  

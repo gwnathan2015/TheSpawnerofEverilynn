@@ -91,11 +91,6 @@ function characters.Character:respawn()
     self.stats.current_health = self.stats.max_health
 end
 
--- determines character health
-function characters.Character:health()
-    
-
-end
 
 -- determines if the characters attack the player or not
 function characters.Character:faction()

@@ -34,7 +34,7 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-2.0| TBA| TBA| fort machine|
 | *PA-2.0.1| TBA| TBA| fort machine|
 | *PA-2.0.2| TBA| TBA| fort machine|
-| *PA-2.1.0| TBA| TBA| fort machine|
+| *PA-2.1.0| TBA| TBA| TBA|
 
 ## Features
  
@@ -94,30 +94,31 @@ return {
 }
 ```
 
-the init.lua file HAS to tell the game where every file in the code section is, because in reality, in the code folder, you can put any folder path you want, as long as init.lua tells the game where the mods files are. the maps have to have the mods name in it with underscores replacing spaces. the assets folder has to be organized exactly like is shown, or else the game wont load them properly, and you will be stuck with broken maps.
+the init.lua file HAS to tell the game where every file in the code section is, because in reality, in the code folder, you can put any folder path you want, as long as init.lua tells the game where the mods files are. the maps have to have the mods name in it with underscores replacing spaces. the assets folder has to be organized exactly like is shown, or else the game won't load them properly, and you will be stuck with broken maps.
 
 there are three types of mods, content mods witch only add maps using vanilla or modded tiles, and they don't need an assets folder, but everything else remains the same, addition mods, which have everything as shown, and feature mods, witch don't add maps or tiles, but can add brand new features, and even help loading other mods like an API core thingy in Minecraft modding. please note this is planned theoretical and won't actually work without a lot of rewriting the game engine. we hope to be there by the time were at our last beta or first release (if that ever comes)
 
 
 
-## LORE AND STORY
-story game about mythical quests and creatures
+##characters
 
-|character | faction|
-|----------|--------|
-|wizard | ally(sells potions)|
-|swordsman | ally(fights with player)|
-|farmer | ally(sells food to heal)|
-|tool smith | ally(sells weapons and tools to help you)|
-|dwarves | enemy|
-|king of fort city | neutral|
-|king of everless | neutral|
+|character | faction| implemented? |
+|----------|--------|--------------|
+|wizard | ally (sells potions) |not fully|
+|swordsman | ally (fights with player) |not fully|
+|farmer | ally (sells food to heal) |not fully|
+|tool smith | ally (sells weapons and tools to help you) |not at all|
+|dwarves | enemy| not at all|
+|king of fort city | ally | not at all|
+|king of everless | ally| not at all|
+
+## LORE AND STORY
 
 in 234 CE of the planet of everliynn, a lone dwarf stumbles upon the "spawner" and he uses its full potential to corrupt and bend the kingdom of Evely to his will, soon he destroyed it, building the castle fort city of dwarvia to replace it.
 
 in 245 CE of the planet everliynn, the lone dwarf declares the empire of dwarvenland. many nearby kingdoms fall to his imperial forces, as he plumages the world
 
-now, in 256 CE of the planet everliynn, you alone can plan and manage to defeat the dwarven king, starting from the last free, big city, fort city, you must free the world of the dwarven empire, and you are not alone in your fights, you have the wizard, who will gladly sell you your potions in return for coins gained by defeating dwarves, the farmer, who will gladly sell you food to heal your health after a great fight with dwarves, and your most loyal ally, the swordsman, who pledged to protect and help you in combat. the reason for this is unknown, and what the spawner is unknown, however the swordsman says that he thinks is an amalgamation of the mythical "creator of the world's powers after he is said to have been tricked into losing his powers by a small group of kings, seeking power for themselves, however the power never managed to get to those kings, and eventually over time became deep in the earth and compacted into the spawner, only for it to be found by that lone dwarf when he was mining.
+now, in 256 CE of the planet Everilynn, you alone can plan and manage to defeat the dwarven king, starting from the last free, big city, fort city, you must free the world of the dwarven empire, and you are not alone in your fights, you have the wizard, who will gladly sell you your potions in return for coins gained by defeating dwarves, the farmer, who will gladly sell you food to heal your health after a great fight with dwarves, and your most loyal ally, the swordsman, who pledged to protect and help you in combat. the reason for this is unknown, and what the spawner is unknown, however the swordsman says that he thinks is an amalgamation of the mythical "creator of the world's powers after he is said to have been tricked into losing his powers by a small group of kings, seeking power for themselves, however the power never managed to get to those kings, and eventually over time became deep in the earth and compacted into the spawner, only for it to be found by that lone dwarf when he was mining.
 
 the goals and intent of the dwarf remain unknown, except for one thing that an elven spy in the dwarven court said, he said "the dwarven king said 'KILL THEM ALL, THE ELVES, THE HUMANS, THE ANIMALS, KILL THEM, ALL, GIVE ME ALL THEIR WEALTH, AND GROW OUR POPULATION! SOON WE Shall MARCH ON FORT CITY" ever since then, fort city and everless have been getting attacked, and while fort city created an elaborate wall and canal thing, everless grew a large barrier of trees, stone, dirt, grass, and water
 

@@ -26,8 +26,8 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                             |cavern              |
 | *PA-1.8.6| Map expansion | no new tiles, but map expansion.                                                  |crystal             |
 | *PA-1.9.0| UI update| finishes UI |crystal|
-| *PA-1.9.1| TBA| TBA| crystal|
-| *PA-1.9.2| TBA| TBA| crystal|
+| *PA-1.9.1| shops update| explore a variety of shops run by your allies in fort city| crystal|
+| *PA-1.9.2| map expasion 2| map expansion, new tiles maybe, houses maybe, but bigger map definitely.| crystal, map expansion 57483025742035749203574389302574383205|
 | *PA-1.9.3| TBA| TBA| crystal|
 | *PA-1.9.4| modding| support for the planned modding, not released | crystal|
 | *PA-1.9.5| TBA| TBA| crystal|
@@ -100,7 +100,7 @@ there are three types of mods, content mods witch only add maps using vanilla or
 
 
 
-##characters
+## CHARACTERS
 
 |character | faction| implemented? |
 |----------|--------|--------------|

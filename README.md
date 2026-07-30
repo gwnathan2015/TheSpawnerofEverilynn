@@ -30,11 +30,12 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-1.9.2| map expasion 2| map expansion, new tiles maybe, houses maybe, but bigger map definitely.| crystal, map expansion 57483025742035749203574389302574383205|
 | *PA-1.9.3| map expansion 3| anothe rmap expansion. likely an attempt at quest implementation and UI| crystal, map expansion 57483025742035749203574389302574383206|
 | *PA-1.9.4| modding| support for the planned modding, not released | crystal|
-| *PA-1.9.5| TBA| TBA| crystal|
+| *PA-1.9.5| shop debugging update| bugs related to shops will be fixed| crystal|
 | *PA-2.0| TBA| TBA| fort machine|
 | *PA-2.0.1| TBA| TBA| fort machine|
 | *PA-2.0.2| TBA| TBA| fort machine|
-| *PA-2.1.0| TBA| TBA| TBA|
+| *PA-2.1.0| TBA| TBA| everless machine|
+| *PA-2.1.1| TBA| TBA| everless machine|
 
 ## Features
  

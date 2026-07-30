@@ -36,6 +36,7 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-2.0.2| TBA| TBA| fort machine|
 | *PA-2.1.0| TBA| TBA| everless machine|
 | *PA-2.1.1| TBA| TBA| everless machine|
+| FAR FAR FUTURE| multiplayer update| TBA| TBA|
 
 ## Features
  

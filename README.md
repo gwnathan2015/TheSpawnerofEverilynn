@@ -23,6 +23,7 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-1.8.2| Health update|addition of characters.coordinates and characters.stats                             |cavern              |
 | *PA-1.8.3| health update 2| finishes the health update                                                       |cavern              |
 | *PA-1.8.4| health update 3|adds more to the health update. not yet released. also adds music and title screen| cavern             |
+| *PA-1.8.4 1/2| INVETORY AND COMMANDS| adds inventory and a basic command /give [the item here] player |cavern |
 | *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                             |cavern              |
 | *PA-1.8.6| Map expansion | no new tiles, but map expansion|crystal,  map expansion 57483025742035749203574389302574383204|
 | *PA-1.9.0| UI update| finishes UI |crystal|

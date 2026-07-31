@@ -39,6 +39,26 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-2.1.1| TBA| TBA| everless machine|
 | FAR FAR FUTURE| multiplayer update| TBA| TBA|
 
+## PA-1.6
+
+while underappreciated now, PA-1.6 was a complete breakthrough, instead of doing nested Lua tables like this:
+
+    game_map2 = {
+        { { u = { GREEN }, o = { TREE_U } }, { u = { GREEN } },   { u = { FLOWERS } }, { u = { GREEN } },   { u = { FLOWERS } }, { u = { FLOWERS } }, { u = { FLOWERS } }, { u = { GREEN } },   { u = { GREEN } } },
+        { { u = { GREEN, TREE_L } },         { u = { PATH } },    { u = { PATH } },    { u = { FLOWERS } }, { u = { GREEN } },   { u = { GREEN } },   { u = { PATH } },    { u = { FLOWERS } }, { u = { FLOWERS } } },
+        { { u = { FLOWERS } },               { u = { PATH } },    { u = { GREEN } },   { u = { GREEN } },   { u = { FLOWERS } }, { u = { FLOWERS } }, { u = { GREEN } },   { u = { PATH } },    { u = { GREEN } } },
+        { { u = { GREEN } },                 { u = { FLOWERS } }, { u = { GREEN } },   { u = { PATH } },    { u = { FLOWERS } }, { u = { GREEN } },   { u = { GREEN } },   { u = { PATH } },    { u = { GREEN } } },
+        { { u = { FLOWERS } },               { u = { GREEN } },   { u = { PATH } },    { u = { PATH } },    { u = { PATH } },    { u = { GREEN } },   { u = { FLOWERS } }, { u = { PATH } },    { u = { GREEN } , o = {TREE_U}} },
+        { { u = { PATH } },                  { u = { FLOWERS } }, { u = { GREEN } },   { u = { PATH } },    { u = { PATH } },    { u = { FLOWERS } }, { u = { PATH } },    { u = { GREEN } },   { u = { GREEN, TREE_L } } },
+        { { u = { PATH } },                  { u = { PATH } },    { u = { GREEN } },   { u = { FLOWERS } }, { u = { PATH } },    { u = { PATH } },    { u = { PATH } },    { u = { PATH } },    { u = { GREEN } } },
+        { { u = { PATH } },                  { u = { GREEN } },   { u = { PATH } },    { u = { PATH } },    { u = { FLOWERS } }, { u = { PATH } },    { u = { PATH } },    { u = { GREEN } },   { u = { PATH } } },
+        { { u = { PATH } },                  { u = { GREEN } },   { u = { GREEN } },   { u = { FLOWERS } }, { u = { PATH } },    { u = { GREEN } },   { u = { FLOWERS } }, { u = { GREEN } },   { u = { FLOWERS } } },
+        { { u = { PATH }, o = {TREE_U} },    { u = { GREEN } },   { u = { GREEN } },   { u = { FLOWERS } }, { u = { PATH } },    { u = { GREEN } },   { u = { FLOWERS } }, { u = { GREEN } },   { u = { FLOWERS } } },
+        { { u = { GREEN, TREE_L } },         { u = { GREEN } },   { u = { FLOWERS } }, { u = { FLOWERS } }, { u = { PATH } },    { u = { GREEN } },   { u = { FLOWERS } }, { u = { PATH } },   { u = { FLOWERS } } }
+    }
+
+we just decided to turn it to JSON! we added three files, mapreader.lua, the most important, uses a Json loading library thingy to load the Json map/maps, map1.json, the 2nd most important one, is the map itself, now using a structure saner like "|GF  |G  |GF" instead of the chaos from before. the other file, map.lua barely does anything other than add bushes, an entity-like object drawn over the player.
+
 ## Features
  
 nothing much to see here, most features aren't here yet, although there is a wizard (supposed to sell potions when the game is done), a swordsman (follows the player and supposed to help the player defeat dwarves) and a working movement system where the bottom half of trees and NPCs can't be moved into. to see future game updates go into version.md.

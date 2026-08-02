@@ -1,4 +1,3 @@
--- story game about magical creatures and quests
 
 local function sign(value)
     if value > 0 then return 1 end
@@ -11,6 +10,8 @@ sprites = {}
 require ("map.map")
 local characters = require ("characters")
 require("map.mapreader")
+
+game_state = "title"
 
 game_map1 = read_map("ASSETS/maps/map1.json")
 
@@ -82,11 +83,12 @@ function love.load()
         sprites[i + 1000] = love.graphics.newImage(filename)
     end
 
-    love.window.setTitle("Spawner of Everilynn Pre-Alpha-1.8.3")
+    love.window.setTitle("Spawner of Everilynn Pre-Alpha-1.8.4")
     love.window.setMode(800, 600, {resizable=true, vsync=0, minwidth=400, minheight=300})
 
-    local img = love.image.newImageData("icon.png")
-    love.window.setIcon(img)
+    local iconimg_data = love.image.newImageData("icon.png")
+    iconimg = love.graphics.newImage("icon.png")
+    love.window.setIcon(iconimg_data)
 end
 
 local function deal_environmental_damage()
@@ -94,7 +96,7 @@ local function deal_environmental_damage()
         local pos = the_character:pos()
         local tile = game_map1[pos.y][pos.x]
         if tile.u[1] == SPIKE then
-            the_character.stats:deal_damage(2)
+            the_character.stats:deal_damage(4)
         end
     end
 end
@@ -116,26 +118,65 @@ function love.update(step_in_time)
    handle_status_updates()
 end
 
-function love.draw()
+function draw_alive()
     local col_number, row_number, row, x_c, y_c
     draw_map(game_map1, sprites)
     characters.draw_characters(sprites)
     draw_map_overlay(game_map1, sprites)
     local max_x = love.graphics.getWidth()
 
-local health = characters.main_character.stats.current_health
-local max_health = characters.main_character.stats.max_health
-local health_str = string.format( "%d/%d", health, max_health )
-love.graphics.setColor({0.4,0.1,0.2,1})
-love.graphics.print(health_str, max_x - 250, 30)
+    local health = characters.main_character.stats.current_health
+    local max_health = characters.main_character.stats.max_health
+    local health_str = string.format( "%d/%d", health, max_health )
 
-love.graphics.setColor({1,1,1,1})
+    love.graphics.setColor({0.4,0.1,0.2,1})
+    love.graphics.print(health_str, max_x - 250, 30)
 
+    love.graphics.setColor({1,1,1,1})
 end
 
+function draw_title()
+    local window_width = love.graphics.getWidth()
+    local window_height = love.graphics.getHeight()
+    local icon_width = iconimg:getPixelWidth()
+    local icon_height = iconimg:getPixelHeight()
+    --  |------------------------- window_width ---------------|
+    --  |                  |..icon_width*0.5.. |               |
+    --  |                  <-------                            |
+    --  |                         ^ window_width / 2           |
+    local icon_x_offest_from_middle = icon_width / 2 / 2
+    local icon_y_offest_from_middle = icon_height / 2 / 2
 
+    local text = "The Spawner of Everilynn"
+    local font       = love.graphics.getFont()
+	local textWidth  = font:getWidth(text)
+	local textHeight  = font:getHeight()
+    local text_x_offset_from_middle = textWidth / 2
+    local text_y_offset_from_middle = icon_y_offest_from_middle + 50
 
-function love.keypressed(key, scancode, isrepeat)
+    love.graphics.draw(
+        iconimg, 
+        window_width/2 - icon_x_offest_from_middle, 
+        window_height/2 - icon_y_offest_from_middle, 
+        0, 
+        0.5, 
+        0.5)
+    love.graphics.print(
+        text, 
+        window_width/2 - text_x_offset_from_middle, 
+        window_height/2 + text_y_offset_from_middle + 1.5*textHeight
+    )
+end
+
+function love.draw()
+    if game_state == 'alive' then
+        draw_alive()
+    elseif game_state == 'title' then
+        draw_title()
+    end
+end
+
+function handle_alive_keys(key, scancode, isrepeat)
     if key == "escape" then
         love.event.quit()
     elseif key == "w" then
@@ -148,6 +189,18 @@ function love.keypressed(key, scancode, isrepeat)
         characters.main_character:move(1, 0)
     elseif key == "r" then 
         characters.main_character:respawn()
+    end
+end
+
+function love.keypressed(key, scancode, isrepeat)
+    if game_state == 'alive' then
+        handle_alive_keys(key, scancode, isrepeat)
+    elseif game_state == 'title' then
+        if key == "escape" then
+            love.event.quit()
+        elseif key == "return" then
+            game_state = 'alive'
+        end
     end
 end
 

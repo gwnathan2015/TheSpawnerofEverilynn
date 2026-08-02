@@ -72,9 +72,7 @@ press R to respawn if you ever need that. also pressing ESC closes the game
 
 
 ## PLANNED MODDING
-
-for the future, when modding can be implemented (maybe it will) mods will look like this:
-
+mods will look like this:
 ```
 mods/
     dwarven_expansion_mod/
@@ -93,9 +91,7 @@ mods/
             items.lua
             init.lua
 ```
-
 the info.lua file for each mod will say basic info like:
-
 ```
 return {
     name = "Dwarven Expansion Mod",
@@ -116,12 +112,15 @@ return {
     load_priority = 1
 }
 ```
+In the future, when modding can be implemented (maybe it will), mods will follow a specific folder structure. Each mod will live inside the “mods” directory. A typical mod folder will contain an info file, an assets folder, and a code folder. The assets folder will contain tiles, characters, items, UI elements, music, and sounds. The code folder will contain maps, hazards, NPC definitions, item definitions, and an init.lua file that acts as the mod’s entry point.
 
-the init.lua file HAS to tell the game where every file in the code section is, because in reality, in the code folder, you can put any folder path you want, as long as init.lua tells the game where the mods files are. the maps have to have the mods name in it with underscores replacing spaces. the assets folder has to be organized exactly like is shown, or else the game won't load them properly, and you will be stuck with broken maps.
+The info.lua file inside each mod will contain metadata describing the mod. This metadata includes the mod’s name, version, author, description, mod type, entry point, asset directory paths, dependencies, and load priority. The mod_type field determines what kind of mod it is. The entry field tells the game which file to execute first. The assets field lists the directories where the mod’s assets are stored. The dependencies field lists other mods required for this mod to function. The load_priority field determines the order in which mods are loaded.
 
-there are three types of mods, content mods witch only add maps using vanilla or modded tiles, and they don't need an assets folder, but everything else remains the same, addition mods, which have everything as shown, and feature mods, witch don't add maps or tiles, but can add brand new features, and even help loading other mods like an API core thingy in Minecraft modding. please note this is planned theoretical and won't actually work without a lot of rewriting the game engine. we hope to be there by the time were at our last beta or first release (if that ever comes)
+The init.lua file must explicitly tell the game where every file in the code folder is located. Modders can organize their code folder however they want, but init.lua must reference each file so the game can load it. Map files must include the mod’s name in their filename, with spaces replaced by underscores. The assets folder must follow the exact structure described above, or the game will not load the assets correctly, resulting in broken maps or missing content.
 
+There are three planned types of mods. Content mods only add maps using either vanilla tiles or tiles added by other mods. Content mods do not require an assets folder, but they still follow the same overall structure. Addition mods include everything shown in the full mod structure. They add maps, tiles, characters, items, hazards, UI elements, music, sounds, and other content. Feature mods do not add maps or tiles. Instead, they add new gameplay systems, mechanics, or engine-level features. Feature mods can also act as compatibility layers or API cores that help other mods function, similar to how Minecraft modding frameworks work.
 
+This entire modding system is theoretical and will require significant rewriting of the game engine. It is planned for PA-1.9.4
 
 ## CHARACTERS
 

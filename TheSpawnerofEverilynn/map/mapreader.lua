@@ -17,7 +17,7 @@ function read_map(filename)
     local content = love.filesystem.read(filename)
     local config = json.decode(content)
     game_map1 = {}
-    for row_index, row_str in pairs(config.game_map) do 
+    for row_index, row_str in pairs(config.game_map1) do 
         -- row_str: "G   |G   |F   |G   |P   |P   |P   |G   |G   |F   "
         row = {}
         game_map1[row_index] = row

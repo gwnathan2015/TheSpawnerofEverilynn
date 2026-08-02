@@ -168,7 +168,7 @@ function draw_title()
     )
 end
 
-menu_music = love.audio.newSource("ASSETS/audio/music/menu_music.ogg")
+menu_music = love.audio.newSource("ASSETS/audio/music/menu_music.ogg", "stream")
 if game_state == 'title' then
     love.audio.play(menu_music)
     if love.audio.source.is_playing == false then

@@ -91,6 +91,7 @@ function characters.Character:respawn()
     self.stats.current_health = self.stats.max_health
 end
 
+
 -- Moves the character around if possible, returns False if not. 
 --if yes then it moves when the player presses to move, if not, then it doesnt move there when the player presses to move
 -- Edits character self.x and self.y.

@@ -1,2 +1,0 @@
-12-14 path tiles
-1-2 grass tiles 1 grass 2 flowers

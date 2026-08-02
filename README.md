@@ -1,30 +1,63 @@
 # The Spawner of Everliynn 
 requires a machine that can run Lua and love 11.5 or later.
-
+<img width="524" height="506" alt="image" src="https://github.com/user-attachments/assets/abcfebed-3cca-444a-bd17-f9e821db5908" />
 ## INSTALLATION.
 
 1. install love 11.5
 2. make sure love 11.5 is properly set up
 3. install the game folder
 4. open powershell or a windows command line runner
-5. type start-process 'path-to-love.exe here' storygame
-6. play!
+5. type start-process 'path-to-love.exe here' TheSpawnerofEverilynn  (note path-to-love.exe needs to be replaced with the FULL path from the root system file c:/ all the way to where love.exe is installed. if on windows it should be right in c:/programfiles (x86)/love/love.exe)
+7. play!
 
 ## VERSIONS
 
-| Version |name           | Notes                                                                  |
-|---------|---------------|------------------------------------------------------------------------|
-| *PA-1.4 |NA             |adding characters.lua                                                   |
-| *PA-1.5 |refactor pt. 1 | refactoring characters.lua                                             |
-| *PA-1.6 |refactor pt. 2 | refactoring map.lua and characters.lua                                 |
-| *PA-1.7 |refactor pt. 3 | refactoring characters.lua                                             |
-| *PA-1.8 |NA             |refactor of character positioning and movement system                   |
-| *PA-1.8.1|Github update |addition of the github repository, and minor changes to the version file|
-| *PA-1.8.2| Health update|addition of characters.coordinates and characters.stats                 |
-| *PA-1.8.3| health update 2| finishes the health update                                           |
-| *PA-1.8.4| health update 3|adds more to the health update. not yet released. also adds music and title screen|
-| *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                 |
-| *PA-1.8.6| Map expansion | no new tiles, but map expansion.                                      |
+| Version |name           | Notes                                                                              | Codename           |
+|---------|---------------|------------------------------------------------------------------------------------|--------------------|
+| *PA-1.4 |NA             |adding characters.lua                                                               |refactor era                |
+| *PA-1.5 |refactor pt. 1 | refactoring characters.lua                                                         |refactor era                |
+| *PA-1.6 |refactor pt. 2 | refactoring map.lua and characters.lua                                             |refactor era                |
+| *PA-1.7 |refactor pt. 3 | refactoring characters.lua                                                         |refactor era                |
+| *PA-1.8 |NA             |refactor of character positioning and movement system                               |cavern              |
+| *PA-1.8.1|Github update |addition of the github repository, and minor changes to the version file            |cavern              |
+| *PA-1.8.2| Health update|addition of characters.coordinates and characters.stats                             |cavern              |
+| *PA-1.8.3| health update 2| finishes the health update                                                       |cavern              |
+| *PA-1.8.4| health update 3|adds more to the health update. not yet released. also adds music and title screen| cavern             |
+| *PA-1.8.4 1/2| INVETORY AND COMMANDS| adds inventory and a basic command /give [the item here] player |cavern |
+| *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                             |cavern              |
+| *PA-1.8.6| Map expansion | no new tiles, but map expansion|crystal,  map expansion 57483025742035749203574389302574383204|
+| *PA-1.9.0| UI update| finishes UI |crystal|
+| *PA-1.9.1| shops update| explore a variety of shops run by your allies in fort city| crystal|
+| *PA-1.9.2| map expasion 2| map expansion, new tiles maybe, houses maybe, but bigger map definitely.| crystal, map expansion 57483025742035749203574389302574383205|
+| *PA-1.9.3| map expansion 3| anothe rmap expansion. likely an attempt at quest implementation and UI| crystal, map expansion 57483025742035749203574389302574383206|
+| *PA-1.9.4| modding| support for the planned modding, not released | crystal|
+| *PA-1.9.5| shop debugging update| bugs related to shops will be fixed| crystal|
+| *PA-2.0| TBA| TBA| fort machine|
+| *PA-2.0.1| TBA| TBA| fort machine|
+| *PA-2.0.2| TBA| TBA| fort machine|
+| *PA-2.1.0| TBA| TBA| everless machine|
+| *PA-2.1.1| TBA| TBA| everless machine|
+| FAR FAR FUTURE| multiplayer update| TBA| TBA|
+
+## PA-1.6
+
+while underappreciated now, PA-1.6 was a complete breakthrough, instead of doing nested Lua tables like this:
+
+    game_map2 = {
+        { { u = { GREEN }, o = { TREE_U } }, { u = { GREEN } },   { u = { FLOWERS } }, { u = { GREEN } },   { u = { FLOWERS } }, { u = { FLOWERS } }, { u = { FLOWERS } }, { u = { GREEN } },   { u = { GREEN } } },
+        { { u = { GREEN, TREE_L } },         { u = { PATH } },    { u = { PATH } },    { u = { FLOWERS } }, { u = { GREEN } },   { u = { GREEN } },   { u = { PATH } },    { u = { FLOWERS } }, { u = { FLOWERS } } },
+        { { u = { FLOWERS } },               { u = { PATH } },    { u = { GREEN } },   { u = { GREEN } },   { u = { FLOWERS } }, { u = { FLOWERS } }, { u = { GREEN } },   { u = { PATH } },    { u = { GREEN } } },
+        { { u = { GREEN } },                 { u = { FLOWERS } }, { u = { GREEN } },   { u = { PATH } },    { u = { FLOWERS } }, { u = { GREEN } },   { u = { GREEN } },   { u = { PATH } },    { u = { GREEN } } },
+        { { u = { FLOWERS } },               { u = { GREEN } },   { u = { PATH } },    { u = { PATH } },    { u = { PATH } },    { u = { GREEN } },   { u = { FLOWERS } }, { u = { PATH } },    { u = { GREEN } , o = {TREE_U}} },
+        { { u = { PATH } },                  { u = { FLOWERS } }, { u = { GREEN } },   { u = { PATH } },    { u = { PATH } },    { u = { FLOWERS } }, { u = { PATH } },    { u = { GREEN } },   { u = { GREEN, TREE_L } } },
+        { { u = { PATH } },                  { u = { PATH } },    { u = { GREEN } },   { u = { FLOWERS } }, { u = { PATH } },    { u = { PATH } },    { u = { PATH } },    { u = { PATH } },    { u = { GREEN } } },
+        { { u = { PATH } },                  { u = { GREEN } },   { u = { PATH } },    { u = { PATH } },    { u = { FLOWERS } }, { u = { PATH } },    { u = { PATH } },    { u = { GREEN } },   { u = { PATH } } },
+        { { u = { PATH } },                  { u = { GREEN } },   { u = { GREEN } },   { u = { FLOWERS } }, { u = { PATH } },    { u = { GREEN } },   { u = { FLOWERS } }, { u = { GREEN } },   { u = { FLOWERS } } },
+        { { u = { PATH }, o = {TREE_U} },    { u = { GREEN } },   { u = { GREEN } },   { u = { FLOWERS } }, { u = { PATH } },    { u = { GREEN } },   { u = { FLOWERS } }, { u = { GREEN } },   { u = { FLOWERS } } },
+        { { u = { GREEN, TREE_L } },         { u = { GREEN } },   { u = { FLOWERS } }, { u = { FLOWERS } }, { u = { PATH } },    { u = { GREEN } },   { u = { FLOWERS } }, { u = { PATH } },   { u = { FLOWERS } } }
+    }
+
+we just decided to turn it to JSON! we added three files, mapreader.lua, the most important, uses a Json loading library thingy to load the Json map/maps, map1.json, the 2nd most important one, is the map itself, now using a structure saner like "|GF  |G  |GF" instead of the chaos from before. the other file, map.lua barely does anything other than add bushes, an entity-like object drawn over the player.
 
 ## Features
  
@@ -34,7 +67,7 @@ press R to respawn if you ever need that. also pressing ESC closes the game
 
 <img width="800" height="637" alt="Screenshot 2026-07-27 110459" src="https://github.com/user-attachments/assets/68067903-6cc7-474b-be3b-91058840809c" />
 
-<img width="524" height="506" alt="image" src="https://github.com/user-attachments/assets/abcfebed-3cca-444a-bd17-f9e821db5908" />
+
 
 
 
@@ -42,6 +75,7 @@ press R to respawn if you ever need that. also pressing ESC closes the game
 
 for the future, when modding can be implemented (maybe it will) mods will look like this:
 
+```
 mods/
     dwarven_expansion_mod/
         dwarven_expansion_mod info.lua
@@ -58,9 +92,11 @@ mods/
             npcs.lua
             items.lua
             init.lua
+```
 
 the info.lua file for each mod will say basic info like:
 
+```
 return {
     name = "Dwarven Expansion Mod",
     version = "1.0",
@@ -79,31 +115,33 @@ return {
     dependencies = {},
     load_priority = 1
 }
+```
 
-the init.lua file HAS to tell the game where every file in the code section is, because in reality, in the code folder, you can put any folder path you want, as long as init.lua tells the game where the mods files are. the maps have to have the mods name in it with underscores replacing spaces. the assets folder has to be organized exactly like is shown, or else the game wont load them properly, and you will be stuck with broken maps.
+the init.lua file HAS to tell the game where every file in the code section is, because in reality, in the code folder, you can put any folder path you want, as long as init.lua tells the game where the mods files are. the maps have to have the mods name in it with underscores replacing spaces. the assets folder has to be organized exactly like is shown, or else the game won't load them properly, and you will be stuck with broken maps.
 
 there are three types of mods, content mods witch only add maps using vanilla or modded tiles, and they don't need an assets folder, but everything else remains the same, addition mods, which have everything as shown, and feature mods, witch don't add maps or tiles, but can add brand new features, and even help loading other mods like an API core thingy in Minecraft modding. please note this is planned theoretical and won't actually work without a lot of rewriting the game engine. we hope to be there by the time were at our last beta or first release (if that ever comes)
 
 
 
-## LORE AND STORY
-story game about mythical quests and creatures
+## CHARACTERS
 
-|character | faction|
-|----------|--------|
-|wizard | ally(sells potions)|
-|swordsman | ally(fights with player)|
-|farmer | ally(sells food to heal)|
-|tool smith | ally(sells weapons and tools to help you)|
-|dwarves | enemy|
-|king of fort city | neutral|
-|king of everless | neutral|
+|character | faction| implemented? |
+|----------|--------|--------------|
+|wizard | ally (sells potions) |not fully|
+|swordsman | ally (fights with player) |not fully|
+|farmer | ally (sells food to heal) |not fully|
+|tool smith | ally (sells weapons and tools to help you) |not at all|
+|dwarves | enemy| not at all|
+|king of fort city | ally | not at all|
+|king of everless | ally| not at all|
+
+## LORE AND STORY
 
 in 234 CE of the planet of everliynn, a lone dwarf stumbles upon the "spawner" and he uses its full potential to corrupt and bend the kingdom of Evely to his will, soon he destroyed it, building the castle fort city of dwarvia to replace it.
 
 in 245 CE of the planet everliynn, the lone dwarf declares the empire of dwarvenland. many nearby kingdoms fall to his imperial forces, as he plumages the world
 
-now, in 256 CE of the planet everliynn, you alone can plan and manage to defeat the dwarven king, starting from the last free, big city, fort city, you must free the world of the dwarven empire, and you are not alone in your fights, you have the wizard, who will gladly sell you your potions in return for coins gained by defeating dwarves, the farmer, who will gladly sell you food to heal your health after a great fight with dwarves, and your most loyal ally, the swordsman, who pledged to protect and help you in combat. the reason for this is unknown, and what the spawner is unknown, however the swordsman says that he thinks is an amalgamation of the mythical "creator of the world's powers after he is said to have been tricked into losing his powers by a small group of kings, seeking power for themselves, however the power never managed to get to those kings, and eventually over time became deep in the earth and compacted into the spawner, only for it to be found by that lone dwarf when he was mining.
+now, in 256 CE of the planet Everilynn, you alone can plan and manage to defeat the dwarven king, starting from the last free, big city, fort city, you must free the world of the dwarven empire, and you are not alone in your fights, you have the wizard, who will gladly sell you your potions in return for coins gained by defeating dwarves, the farmer, who will gladly sell you food to heal your health after a great fight with dwarves, and your most loyal ally, the swordsman, who pledged to protect and help you in combat. the reason for this is unknown, and what the spawner is unknown, however the swordsman says that he thinks is an amalgamation of the mythical "creator of the world's powers after he is said to have been tricked into losing his powers by a small group of kings, seeking power for themselves, however the power never managed to get to those kings, and eventually over time became deep in the earth and compacted into the spawner, only for it to be found by that lone dwarf when he was mining.
 
 the goals and intent of the dwarf remain unknown, except for one thing that an elven spy in the dwarven court said, he said "the dwarven king said 'KILL THEM ALL, THE ELVES, THE HUMANS, THE ANIMALS, KILL THEM, ALL, GIVE ME ALL THEIR WEALTH, AND GROW OUR POPULATION! SOON WE Shall MARCH ON FORT CITY" ever since then, fort city and everless have been getting attacked, and while fort city created an elaborate wall and canal thing, everless grew a large barrier of trees, stone, dirt, grass, and water
 

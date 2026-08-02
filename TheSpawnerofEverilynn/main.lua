@@ -67,9 +67,10 @@ function move_swordsman()
 
     local difference_in_y = swordsman_destination_pos.y - swordsman_current_pos.y
     local step_in_y = sign(difference_in_y)
-
-    -- Only allows -1, 0, 1
-    characters.swordsman:move(step_in_x, step_in_y)
+    if game_state == 'alive' then
+         -- Only allows -1, 0, 1
+        characters.swordsman:move(step_in_x, step_in_y)
+    end
 end
 
 function love.load()
@@ -95,8 +96,10 @@ local function deal_environmental_damage()
     for i, the_character in pairs(characters.Character.all_characters) do
         local pos = the_character:pos()
         local tile = game_map1[pos.y][pos.x]
-        if tile.u[1] == SPIKE then
+        if game_state == 'alive' then
+            if tile.u[1] == SPIKE then
             the_character.stats:deal_damage(4)
+            end
         end
     end
 end
@@ -171,9 +174,12 @@ end
 menu_music = love.audio.newSource("ASSETS/audio/music/menu_music.ogg", "stream")
 if game_state == 'title' then
     love.audio.play(menu_music)
-    if love.audio.source.is_playing == false then
+    menu_music:setLooping(true)
+    if not menu_music:isPlaying(menu_music) then
         love.audio.play(menu_music)
     end
+elseif game_state ~= 'title' then
+    menu_music:setlooping(false)
 end
 function love.draw()
     if game_state == 'alive' then

@@ -16,11 +16,11 @@ TILE_LOADER_MAP = {
 function read_map(filename)
     local content = love.filesystem.read(filename)
     local config = json.decode(content)
-    game_map = {}
+    game_map1 = {}
     for row_index, row_str in pairs(config.game_map) do 
         -- row_str: "G   |G   |F   |G   |P   |P   |P   |G   |G   |F   "
         row = {}
-        game_map[row_index] = row
+        game_map1[row_index] = row
         local i = 1
         for cell_str,v in string.gmatch(row_str, "([^|]+)") do
             u1 = TILE_LOADER_MAP[string.sub(cell_str,1,1)]
@@ -37,8 +37,8 @@ function read_map(filename)
             i = i+1
         end
     end
-    return game_map
+    return game_map1
 end
 
 print('game map loading finished')
-print(json.encode(game_map))
+print(json.encode(game_map1))

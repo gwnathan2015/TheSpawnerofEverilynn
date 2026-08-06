@@ -63,7 +63,7 @@ we just decided to turn it to JSON! we added three files, mapreader.lua, the mos
 
 ## Features
  
-nothing much to see here, most features aren't here yet, although there is a wizard (supposed to sell potions when the game is done), a swordsman (follows the player and supposed to help the player defeat dwarves) and a working movement system where the bottom half of trees and NPCs can't be moved into. to see future game updates go into version.md.
+nothing much to see here, most features aren't here yet, although there is a wizard (supposed to sell potions when the game is done), a swordsman (follows the player and supposed to help the player defeat dwarves) and a working movement system where the bottom half of trees and NPCs can't be moved into. to see future game updates go into features.md.
 we got some nice music (that doesn't play in game yet unless your in the title screen) from the web. for more info about that go to the credits md file in the music folder.
 press R to respawn if you ever need that. also pressing ESC closes the game
 

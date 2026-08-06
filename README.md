@@ -23,7 +23,7 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-1.8.2| Health update|addition of characters.coordinates and characters.stats                             |cavern              |
 | *PA-1.8.3| health update 2| finishes the health update                                                       |cavern              |
 | *PA-1.8.4| Title Screen |adds music, game states, and title screen, current version| cavern             |
-| *PA-1.8.5| COMMANDS| adds a basic command /give [the item here] player |cavern |
+| *PA-1.8.5| COMMANDS| adds a basic command /give [the item here] player, not released yet. |cavern |
 | *PA-1.8.6| Dwarves and enemies| not yet released, adds Dwarves and other enemies                             |cavern              |
 | *PA-1.8.7| Map expansion | no new tiles, but map expansion| crystal, map expansion 57483025742035749203574389302574383204|
 | *PA-1.9.0| UI update| finishes UI |crystal|
@@ -38,6 +38,8 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-2.0.2| TBA| TBA| fort machine|
 | *PA-2.1.0| TBA| TBA| everless machine|
 | *PA-2.1.1| TBA| TBA| everless machine|
+
+past PA-1.8.4 no versions are finished. PA-1.4 isn't that clear on what it actually did but I am pretty sure it did start the characters.lua OOP.
 
 ## PA-1.6
 

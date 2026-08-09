@@ -22,22 +22,24 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-1.8.1|Github update |addition of the github repository, and minor changes to the version file            |cavern              |
 | *PA-1.8.2| Health update|addition of characters.coordinates and characters.stats                             |cavern              |
 | *PA-1.8.3| health update 2| finishes the health update                                                       |cavern              |
-| *PA-1.8.4| health update 3|adds more to the health update. not yet released. also adds music and title screen| cavern             |
-| *PA-1.8.4 1/2| INVETORY AND COMMANDS| adds inventory and a basic command /give [the item here] player |cavern |
-| *PA-1.8.5| Dwarves and enemies| not yet released, adds Dwarves and other enemies                             |cavern              |
-| *PA-1.8.6| Map expansion | no new tiles, but map expansion|crystal,  map expansion 57483025742035749203574389302574383204|
+| *PA-1.8.4| Title Screen |adds music, game states, and title screen, current version| cavern             |
+| *PA-1.8.5| COMMANDS| adds a basic command /give [the item here] player, not released yet. |cavern |
+| *PA-1.8.6| Dwarves and enemies| not yet released, adds Dwarves and other enemies                             |cavern              |
+| *PA-1.8.7| Map expansion | no new tiles, but map expansion| crystal, map expansion 57483025742035749203574389302574383204|
 | *PA-1.9.0| UI update| finishes UI |crystal|
-| *PA-1.9.1| shops update| explore a variety of shops run by your allies in fort city| crystal|
-| *PA-1.9.2| map expasion 2| map expansion, new tiles maybe, houses maybe, but bigger map definitely.| crystal, map expansion 57483025742035749203574389302574383205|
-| *PA-1.9.3| map expansion 3| anothe rmap expansion. likely an attempt at quest implementation and UI| crystal, map expansion 57483025742035749203574389302574383206|
-| *PA-1.9.4| modding| support for the planned modding, not released | crystal|
-| *PA-1.9.5| shop debugging update| bugs related to shops will be fixed| crystal|
+| *PA-1.9.1| UI update 2| also finishes UI| crystal|
+| *PA-1.9.2| shops update| explore a variety of shops run by your allies in fort city| crystal|
+| *PA-1.9.3| map expansion 2| map expansion, new tiles maybe, houses maybe, but bigger map definitely. | crystal, map expansion 57483025742035749203574389302574383205|
+| *PA-1.9.4| map expansion 3| another map expansion. likely an attempt at quest implementation and UI| crystal, map expansion 57483025742035749203574389302574383206|
+| *PA-1.9.5| modding| support for the planned modding, not released | crystal|
+| *PA-1.9.6| shop debugging update| bugs related to shops will be fixed| crystal|
 | *PA-2.0| TBA| TBA| fort machine|
 | *PA-2.0.1| TBA| TBA| fort machine|
 | *PA-2.0.2| TBA| TBA| fort machine|
 | *PA-2.1.0| TBA| TBA| everless machine|
 | *PA-2.1.1| TBA| TBA| everless machine|
-| FAR FAR FUTURE| multiplayer update| TBA| TBA|
+
+past PA-1.8.4 no versions are finished. PA-1.4 isn't that clear on what it actually did but I am pretty sure it did start the characters.lua OOP.
 
 ## PA-1.6
 
@@ -61,8 +63,8 @@ we just decided to turn it to JSON! we added three files, mapreader.lua, the mos
 
 ## Features
  
-nothing much to see here, most features aren't here yet, although there is a wizard (supposed to sell potions when the game is done), a swordsman (follows the player and supposed to help the player defeat dwarves) and a working movement system where the bottom half of trees and NPCs can't be moved into. to see future game updates go into version.md.
-we got some nice music (that doesn't play in game yet) from the web. for more info about that go to the credits md file in the music folder.
+nothing much to see here, most features aren't here yet, although there is a wizard (supposed to sell potions when the game is done), a swordsman (follows the player and supposed to help the player defeat dwarves) and a working movement system where the bottom half of trees and NPCs can't be moved into. to see future game updates go into features.md.
+we got some nice music (that doesn't play in game yet unless your in the title screen) from the web. for more info about that go to the credits md file in the music folder.
 press R to respawn if you ever need that. also pressing ESC closes the game
 
 <img width="800" height="637" alt="Screenshot 2026-07-27 110459" src="https://github.com/user-attachments/assets/68067903-6cc7-474b-be3b-91058840809c" />

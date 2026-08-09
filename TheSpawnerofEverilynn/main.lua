@@ -15,7 +15,7 @@ game_state = "title"
 
 game_map1 = read_map("ASSETS/maps/map1.json")
 
-characters.main_character = characters.Character:new(
+characters.main_character = characters.PlayerCharacter:new(
     "player", 
     1098, 
     game_map1, 
@@ -67,7 +67,7 @@ function move_swordsman()
 
     local difference_in_y = swordsman_destination_pos.y - swordsman_current_pos.y
     local step_in_y = sign(difference_in_y)
-    if game_state == 'alive' then
+    if game_state == 'ingame' then
          -- Only allows -1, 0, 1
         characters.swordsman:move(step_in_x, step_in_y)
     end
@@ -84,21 +84,22 @@ function love.load()
         sprites[i + 1000] = love.graphics.newImage(filename)
     end
 
-    love.window.setTitle("Spawner of Everilynn Pre-Alpha-1.8.4")
+    love.window.setTitle("Spawner of Everilynn Pre-Alpha-1.8.5 Version 1")
     love.window.setMode(800, 600, {resizable=true, vsync=0, minwidth=400, minheight=300})
 
     local iconimg_data = love.image.newImageData("icon.png")
     iconimg = love.graphics.newImage("icon.png")
     love.window.setIcon(iconimg_data)
+    love.graphics.setBackgroundColor(0.8, 0.71, 0.55)
 end
 
 local function deal_environmental_damage()
     for i, the_character in pairs(characters.Character.all_characters) do
         local pos = the_character:pos()
         local tile = game_map1[pos.y][pos.x]
-        if game_state == 'alive' then
+        if game_state == 'ingame' then
             if tile.u[1] == SPIKE then
-            the_character.stats:deal_damage(4)
+            the_character.stats:deal_damage(math.random(1, 4))
             end
         end
     end
@@ -110,32 +111,85 @@ local function handle_status_updates()
     
 end
 
-local time_total = 0
-function love.update(step_in_time)
-   time_total = time_total + step_in_time
-   if time_total >= 1 then
-      time_total = time_total - 1
-      move_swordsman()
-      deal_environmental_damage()
-   end
-   handle_status_updates()
+local TimedUpdate = {}
+
+TimedUpdate.__index = TimedUpdate
+
+function TimedUpdate:new(interval, func)
+    local new_object = {
+        interval = interval,
+        time_total = 0,
+        func = func
+    }
+
+    setmetatable(new_object, {__index = TimedUpdate})
+    new_object.__index = TimedUpdate
+    return new_object
 end
 
-function draw_alive()
+function TimedUpdate:update(step_in_time)
+    self.time_total = self.time_total + step_in_time
+    if self.time_total >= self.interval then
+      self.time_total = self.time_total - self.interval
+      self.func()
+   end
+end
+
+function recover_health()
+    local new_health = characters.main_character.stats.current_health + 1
+    if new_health <= characters.main_character.stats.max_health then
+        characters.main_character.stats.current_health = new_health
+    end
+end
+
+local updaters = {
+    TimedUpdate:new(1, move_swordsman),
+    TimedUpdate:new(1, deal_environmental_damage),
+    TimedUpdate:new(60, recover_health)
+}
+
+local time_total = 0
+function love.update(step_in_time)
+    for index, updater in ipairs(updaters) do
+        updater:update(step_in_time)
+    end
+    handle_status_updates()
+end
+
+function draw_stats(stats, x, y)
+    local health = stats.current_health
+    local max_health = stats.max_health
+    local health_str = string.format( "PlayerHealth: %d/%d", health, max_health )
+
+    love.graphics.setColor({0.4,0.1,0.2,1})
+    love.graphics.print(health_str, x, y)
+
+    love.graphics.setColor({1,1,1,1})
+end
+
+function draw_inventory(inventory, x, y)
+    local coins = inventory.coins
+    local coins_str = string.format( "Coins: %d", coins)
+
+    love.graphics.setColor({0.4,0.1,0.2,1})
+    love.graphics.print(coins_str, x, y)
+
+    love.graphics.setColor({1,1,1,1})
+end
+
+
+function draw_ingame()
     local col_number, row_number, row, x_c, y_c
     draw_map(game_map1, sprites)
     characters.draw_characters(sprites)
     draw_map_overlay(game_map1, sprites)
     local max_x = love.graphics.getWidth()
 
-    local health = characters.main_character.stats.current_health
-    local max_health = characters.main_character.stats.max_health
-    local health_str = string.format( "%d/%d", health, max_health )
+    local max_x = love.graphics.getWidth()
 
-    love.graphics.setColor({0.4,0.1,0.2,1})
-    love.graphics.print(health_str, max_x - 250, 30)
-
-    love.graphics.setColor({1,1,1,1})
+    
+    draw_stats(characters.main_character.stats, max_x - 250, 30 )
+    draw_inventory(characters.main_character.inventory, max_x - 250, 100)
 end
 
 function draw_title()
@@ -181,15 +235,16 @@ if game_state == 'title' then
 elseif game_state ~= 'title' then
     menu_music:setlooping(false)
 end
+
 function love.draw()
-    if game_state == 'alive' then
-        draw_alive()
+    if game_state == 'ingame' then
+        draw_ingame()
     elseif game_state == 'title' then
         draw_title()
     end
 end
 
-function handle_alive_keys(key, scancode, isrepeat)
+function handle_ingame_keys(key, scancode, isrepeat)
     if key == "escape" then
         love.event.quit()
     elseif key == "w" then
@@ -202,17 +257,19 @@ function handle_alive_keys(key, scancode, isrepeat)
         characters.main_character:move(1, 0)
     elseif key == "r" then 
         characters.main_character:respawn()
+    elseif key == "c" then
+        characters.main_character:add_coins(math.random(1, 10))
     end
 end
 
 function love.keypressed(key, scancode, isrepeat)
-    if game_state == 'alive' then
-        handle_alive_keys(key, scancode, isrepeat)
+    if game_state == 'ingame' then
+        handle_ingame_keys(key, scancode, isrepeat)
     elseif game_state == 'title' then
         if key == "escape" then
             love.event.quit()
         elseif key == "return" then
-            game_state = 'alive'
+            game_state = 'ingame'
         end
     end
 end

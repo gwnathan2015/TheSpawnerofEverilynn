@@ -19,6 +19,22 @@ function characters.Coordinates:__eq(other)
     return self.x == other.x and self.y == other.y
 end
 
+characters.Inventory = {}
+
+characters.Inventory.__index = characters.Inventory
+
+function characters.Inventory:new(with_coins)
+    local new_object = {}
+
+    if with_coins then
+        new_object['coins'] = 0
+    end
+
+    setmetatable(new_object, self)
+    new_object.__index = characters.Inventory
+    return new_object
+end
+
 
 characters.CharacterStats = {
 }
@@ -76,7 +92,8 @@ function characters.Character:new(name, sprite, game_map, stats, x, y)
         game_map = game_map,
         stats = stats,
         x = x, start_x = x,
-        y = y, start_y = y
+        y = y, start_y = y,
+        inventory = characters.Inventory:new()
     }
     setmetatable(new_object, self)
     new_object.__index = characters.Character
@@ -148,6 +165,61 @@ function characters.Character:draw(sprites)
         -- Draw character sprites
         love.graphics.draw(sprites[c_sprite], x_c, y_c)
 end
+
+characters.PlayerCharacter = {}
+
+characters.PlayerCharacter.__index = characters.PlayerCharacter
+setmetatable(characters.PlayerCharacter, {__index = characters.Character})
+
+function characters.PlayerCharacter:add_item(item_name, amount)
+    self.inventory[item_name] = self.inventory[item_name] + amount
+end
+
+function characters.PlayerCharacter:remove_item(item_name, amount)
+    if amount == 0 then
+        return true
+    end
+
+    local current_amount = self.inventory[item_name]
+    if current_amount == nil then
+        return false
+    end
+    if current_amount < amount then
+        return false
+    else
+        self.inventory[item_name] = current_amount - amount
+        return true
+    end    
+end
+
+function characters.PlayerCharacter:add_coins(value)
+    self.inventory.coins = self.inventory.coins + value
+end
+
+function characters.PlayerCharacter:remove_coins(value)
+    if self.inventory.coins < value then
+        return false
+    else
+        self.inventory.coins = self.inventory.coins - value
+        return true
+    end
+end
+
+function characters.PlayerCharacter:new(name, sprite, game_map, stats, x, y)
+    local new_object = characters.Character:new(
+    name, 
+    sprite, 
+    game_map, 
+    stats, 
+    x, 
+    y)
+    new_object.inventory = characters.Inventory:new(true)
+
+    setmetatable(new_object, {__index = characters.PlayerCharacter})
+    new_object.__index = characters.PlayerCharacter
+    return new_object
+end
+
 
 function characters.draw_characters(sprites)
     for num, character in pairs(characters.Character.all_characters) do

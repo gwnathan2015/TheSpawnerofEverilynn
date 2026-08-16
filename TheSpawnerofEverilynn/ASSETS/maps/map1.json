@@ -8,6 +8,7 @@
         "P   |Gf  |P   |P   |G   |GF  |GF  |G   |GF  |GF  |G   |G   |G   ",
         "GU  |G   |GF  |GF  |G   |S   |G   |G   |GF  |G   |G   |GF  |GF  ",
         "GT  |GF  |G   |G   |GF  |G   |G   |GF  |GF  |GU  |GF  |GU  |GF  ",
-        "G   |GF  |G   |GF  |G   |G   |G   |GF  |GF  |GT  |GF  |GT  |G   "
+        "G   |GF  |G   |GF  |G   |G   |G   |GF  |GF  |GT  |GF  |GT  |G   ",
+        "G   |GF  |G   |GF  |GF  |GF  |P   |GF  |GF  |G   |GF  |G   |GF  "
     ]
 }

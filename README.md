@@ -18,7 +18,7 @@ requires a machine that can run Lua and love 11.5 or later.
 | *PA-1.5 |refactor pt. 1 | refactoring characters.lua                                                         |refactor era                |
 | *PA-1.6 |refactor pt. 2 | refactoring map.lua and characters.lua                                             |refactor era                |
 | *PA-1.7 |refactor pt. 3 | refactoring characters.lua                                                         |refactor era                |
-| *PA-1.8 |NA             |refactor of character positioning and movement system                               |cavern              |
+| *PA-1.8 |refactor pt. 4             |refactor of character positioning and movement system                               |refactor era            |
 | *PA-1.8.1|Github update |addition of the github repository, and minor changes to the version file            |cavern              |
 | *PA-1.8.2| Health update|addition of characters.coordinates and characters.stats                             |cavern              |
 | *PA-1.8.3| health update 2| finished the health update                                                       |cavern              |

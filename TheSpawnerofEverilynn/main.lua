@@ -1,15 +1,13 @@
-
-local function sign(value)
-    if value > 0 then return 1 end
-    if value < 0 then return -1 end
-    return 0
-end
+local character_control = require("character_control")
 
 sprites = {}
 
 require ("map.map")
 local characters = require ("characters")
 require("map.mapreader")
+
+local utils = require('utils')
+local render = require('render')
 
 game_state = "title"
 
@@ -51,29 +49,8 @@ characters.swordsman = characters.Character:new(
     4
 )
 
-function swordsman_choose_destination()
-    return characters.main_character:pos()
-end
-
-function move_swordsman()
-    local swordsman_destination_pos = swordsman_choose_destination()
-    local swordsman_current_pos = characters.swordsman:pos()
-
-    -- destination is x = 5, y = 3
-    -- current is     x = 2, y = 9
-
-    local difference_in_x = swordsman_destination_pos.x - swordsman_current_pos.x
-    local step_in_x = sign(difference_in_x)
-
-    local difference_in_y = swordsman_destination_pos.y - swordsman_current_pos.y
-    local step_in_y = sign(difference_in_y)
-    if game_state == 'ingame' then
-         -- Only allows -1, 0, 1
-        characters.swordsman:move(step_in_x, step_in_y)
-    end
-end
-
 function love.load()
+    utils.setup_random()
     love.keyboard.setKeyRepeat( true )
     for i = 0, 131 do
         local filename = string.format("ASSETS/tinytown/Tiles/tile_%04d.png", i)
@@ -84,7 +61,7 @@ function love.load()
         sprites[i + 1000] = love.graphics.newImage(filename)
     end
 
-    love.window.setTitle("Spawner of Everilynn Pre-Alpha-1.8.5 Version 1")
+    love.window.setTitle("Spawner of Everilynn Pre-Alpha-1.8.5 V-2")
     love.window.setMode(800, 600, {resizable=true, vsync=0, minwidth=400, minheight=300})
 
     local iconimg_data = love.image.newImageData("icon.png")
@@ -142,11 +119,66 @@ function recover_health()
     end
 end
 
+death_sound = love.audio.newSource("ASSETS/audio/music/game_over1.mp3", "static")
+menu_music = {
+    love.audio.newSource("ASSETS/audio/music/menu_music.ogg", "stream"),
+    love.audio.newSource("ASSETS/audio/music/menu_music2.mp3", "stream")
+}
+game_music = { 
+    love.audio.newSource("ASSETS/Audio/music/overworld_track_1.ogg", "stream"),
+    love.audio.newSource("ASSETS/Audio/music/overworld_track_2.ogg", "stream")
+}
+
+local current_music
+local last_state
+function update_music()
+    local next_music
+    next_music = nil
+
+    -- TODO: death_status not checke, enrich game_status so we see change.
+    if game_state == last_state then
+        if current_music == nil then
+            return
+        end
+
+        if current_music:isPlaying() then
+            return
+        end
+    end
+    last_state = game_state
+
+    if current_music ~= nil then
+        love.audio.stop(current_music)
+        current_music = nil
+    end
+
+    if game_state == 'title' then
+        local music_choice = math.random( #menu_music )
+        next_music = menu_music[music_choice]
+    elseif game_state ~= 'title' then
+        if characters.main_character.stats.death_status == nil then
+            local music_choice = math.random( #game_music )
+            next_music = game_music[music_choice]
+        else
+            next_music = death_sound
+        end
+    end
+
+
+    if next_music == nil then
+        return
+    end
+    next_music:play()
+    next_music:setLooping(true)
+    current_music = next_music
+end
+
 local updaters = {
-    TimedUpdate:new(1, move_swordsman),
+    TimedUpdate:new(1, character_control.move_swordsman),
     TimedUpdate:new(1, deal_environmental_damage),
     TimedUpdate:new(60, recover_health)
 }
+
 
 local time_total = 0
 function love.update(step_in_time)
@@ -154,117 +186,25 @@ function love.update(step_in_time)
         updater:update(step_in_time)
     end
     handle_status_updates()
+    update_music()
 end
 
-function draw_stats(stats, x, y)
-    local health = stats.current_health
-    local max_health = stats.max_health
-    local health_str = string.format( "PlayerHealth: %d/%d", health, max_health )
-
-    love.graphics.setColor({0.4,0.1,0.2,1})
-    love.graphics.print(health_str, x, y)
-
-    love.graphics.setColor({1,1,1,1})
-end
-
-function draw_inventory(inventory, x, y)
-    local coins = inventory.coins
-    local coins_str = string.format( "Coins: %d", coins)
-
-    love.graphics.setColor({0.4,0.1,0.2,1})
-    love.graphics.print(coins_str, x, y)
-
-    love.graphics.setColor({1,1,1,1})
-end
-
-
-function draw_ingame()
-    local col_number, row_number, row, x_c, y_c
-    draw_map(game_map1, sprites)
-    characters.draw_characters(sprites)
-    draw_map_overlay(game_map1, sprites)
-    local max_x = love.graphics.getWidth()
-
-    local max_x = love.graphics.getWidth()
-
-    
-    draw_stats(characters.main_character.stats, max_x - 250, 30 )
-    draw_inventory(characters.main_character.inventory, max_x - 250, 100)
-end
-
-function draw_title()
-    local window_width = love.graphics.getWidth()
-    local window_height = love.graphics.getHeight()
-    local icon_width = iconimg:getPixelWidth()
-    local icon_height = iconimg:getPixelHeight()
-    --  |------------------------- window_width ---------------|
-    --  |                  |..icon_width*0.5.. |               |
-    --  |                  <-------                            |
-    --  |                         ^ window_width / 2           |
-    local icon_x_offest_from_middle = icon_width / 2 / 2
-    local icon_y_offest_from_middle = icon_height / 2 / 2
-
-    local text = "The Spawner of Everilynn"
-    local font       = love.graphics.getFont()
-	local textWidth  = font:getWidth(text)
-	local textHeight  = font:getHeight()
-    local text_x_offset_from_middle = textWidth / 2
-    local text_y_offset_from_middle = icon_y_offest_from_middle + 50
-
-    love.graphics.draw(
-        iconimg, 
-        window_width/2 - icon_x_offest_from_middle, 
-        window_height/2 - icon_y_offest_from_middle, 
-        0, 
-        0.5, 
-        0.5)
-    love.graphics.print(
-        text, 
-        window_width/2 - text_x_offset_from_middle, 
-        window_height/2 + text_y_offset_from_middle + 1.5*textHeight
-    )
-end
-
-menu_music = love.audio.newSource("ASSETS/audio/music/menu_music.ogg", "stream")
-if game_state == 'title' then
-    love.audio.play(menu_music)
-    menu_music:setLooping(true)
-    if not menu_music:isPlaying(menu_music) then
-        love.audio.play(menu_music)
-    end
-elseif game_state ~= 'title' then
-    menu_music:setlooping(false)
-end
 
 function love.draw()
     if game_state == 'ingame' then
-        draw_ingame()
+        render.draw_ingame()
     elseif game_state == 'title' then
-        draw_title()
-    end
-end
-
-function handle_ingame_keys(key, scancode, isrepeat)
-    if key == "escape" then
-        love.event.quit()
-    elseif key == "w" then
-        characters.main_character:move(0, -1)
-    elseif key == "a" then
-        characters.main_character:move(-1, 0)
-    elseif key == "s" then
-        characters.main_character:move(0, 1)
-    elseif key == "d" then
-        characters.main_character:move(1, 0)
-    elseif key == "r" then 
-        characters.main_character:respawn()
-    elseif key == "c" then
-        characters.main_character:add_coins(math.random(1, 10))
+        render.draw_title()
     end
 end
 
 function love.keypressed(key, scancode, isrepeat)
+    if key == "escape" then
+        love.event.quit()
+    end
+
     if game_state == 'ingame' then
-        handle_ingame_keys(key, scancode, isrepeat)
+        character_control.move_main_character(key)
     elseif game_state == 'title' then
         if key == "escape" then
             love.event.quit()

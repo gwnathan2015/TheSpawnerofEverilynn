@@ -13,7 +13,7 @@ function render.draw_stats(stats, x, y)
     love.graphics.setColor({1,1,1,1})
 end
 
-if death_status ~= nil then
+if characters.main_characterstats.death_status ~= nil then
 	love.graphics.setColor({0.6, 0.15, 0.25, 1})
 	love.graphics.print("Press R to Respawn")
 

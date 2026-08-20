@@ -102,7 +102,7 @@ function characters.Character:new(name, sprite, game_map, stats, x, y)
 end
 
 function characters.Character:respawn()
-    if death_status ~= nil then
+    if self.stats.death_status ~= nil then
         self.x = self.start_x
         self.y = self.start_y
         self.stats.death_status = nil

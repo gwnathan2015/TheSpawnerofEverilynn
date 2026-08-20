@@ -102,10 +102,12 @@ function characters.Character:new(name, sprite, game_map, stats, x, y)
 end
 
 function characters.Character:respawn()
-    self.x = self.start_x
-    self.y = self.start_y
-    self.stats.death_status = nil
-    self.stats.current_health = self.stats.max_health
+    if death_status ~= nil then
+        self.x = self.start_x
+        self.y = self.start_y
+        self.stats.death_status = nil
+        self.stats.current_health = self.stats.max_health
+    end
 end
 
 

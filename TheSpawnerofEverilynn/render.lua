@@ -13,6 +13,13 @@ function render.draw_stats(stats, x, y)
     love.graphics.setColor({1,1,1,1})
 end
 
+if death_status ~= nil then
+	love.graphics.setColor({0.6, 0.15, 0.25, 1})
+	love.graphics.print("Press R to Respawn")
+
+	love.graphics.setcolor({1,1,1,1})
+end
+
 function render.draw_inventory(inventory, x, y)
     local coins = inventory.coins
     local coins_str = string.format( "Coins: %d", coins)

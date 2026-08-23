@@ -1,9 +1,8 @@
-local character_control = require("character_control")
-
 sprites = {}
-
+local music = require("music")
 require ("map.map")
-local characters = require ("characters")
+local character_model = require ("character.model")
+local character_control = require("character.control")
 require("map.mapreader")
 
 local utils = require('utils')
@@ -13,38 +12,38 @@ game_state = "title"
 
 game_map1 = read_map("ASSETS/maps/map1.json")
 
-characters.main_character = characters.PlayerCharacter:new(
+character_model.main_character = character_model.PlayerCharacter:new(
     "player", 
     1098, 
     game_map1, 
-    characters.CharacterStats:new(100),
+    character_model.CharacterStats:new(100),
     2,
     1
 )
 
-characters.farmer = characters.Character:new(
+character_model.farmer = character_model.Character:new(
     "farmer", 
     1085, 
     game_map1,
-    characters.CharacterStats:new(100),
+    character_model.CharacterStats:new(100),
     9,
     6
 )
 
-characters.wizard = characters.Character:new(
+character_model.wizard = character_model.Character:new(
     "wizard", 
     1084, 
     game_map1,
-    characters.CharacterStats:new(100),
+    character_model.CharacterStats:new(100),
     10,
     2
 )
 
-characters.swordsman = characters.Character:new(
+character_model.swordsman = character_model.Character:new(
     "Swordsman", 
     1097, 
     game_map1,
-    characters.CharacterStats:new(120, 70),
+    character_model.CharacterStats:new(120, 70),
     7,
     4
 )
@@ -61,7 +60,7 @@ function love.load()
         sprites[i + 1000] = love.graphics.newImage(filename)
     end
 
-    love.window.setTitle("Spawner of Everilynn Pre-Alpha-1.8.5 V-2")
+    love.window.setTitle("Spawner of Everilynn Pre-Alpha-1.8.5 V-3")
     love.window.setMode(800, 600, {resizable=true, vsync=0, minwidth=400, minheight=300})
 
     local iconimg_data = love.image.newImageData("icon.png")
@@ -71,19 +70,19 @@ function love.load()
 end
 
 local function deal_environmental_damage()
-    for i, the_character in pairs(characters.Character.all_characters) do
+    for i, the_character in pairs(character_model.Character.all_characters) do
         local pos = the_character:pos()
         local tile = game_map1[pos.y][pos.x]
         if game_state == 'ingame' then
             if tile.u[1] == SPIKE then
-            the_character.stats:deal_damage(math.random(1, 4))
+            the_character.stats:deal_damage(50)--math.random(1, 4))
             end
         end
     end
 end
 
 local function handle_status_updates()
-    local the_character = characters.main_character
+    local the_character = character_model.main_character
 
     
 end
@@ -113,65 +112,13 @@ function TimedUpdate:update(step_in_time)
 end
 
 function recover_health()
-    local new_health = characters.main_character.stats.current_health + 1
-    if new_health <= characters.main_character.stats.max_health then
-        characters.main_character.stats.current_health = new_health
+    local new_health = character_model.main_character.stats.current_health + 1
+    if new_health <= character_model.main_character.stats.max_health then
+        character_model.main_character.stats.current_health = new_health
     end
 end
 
-death_sound = love.audio.newSource("ASSETS/audio/music/game_over1.mp3", "static")
-menu_music = {
-    love.audio.newSource("ASSETS/audio/music/menu_music.ogg", "stream"),
-    love.audio.newSource("ASSETS/audio/music/menu_music2.mp3", "stream")
-}
-game_music = { 
-    love.audio.newSource("ASSETS/Audio/music/overworld_track_1.ogg", "stream"),
-    love.audio.newSource("ASSETS/Audio/music/overworld_track_2.ogg", "stream")
-}
 
-local current_music
-local last_state
-function update_music()
-    local next_music
-    next_music = nil
-
-    -- TODO: death_status not checke, enrich game_status so we see change.
-    if game_state == last_state then
-        if current_music == nil then
-            return
-        end
-
-        if current_music:isPlaying() then
-            return
-        end
-    end
-    last_state = game_state
-
-    if current_music ~= nil then
-        love.audio.stop(current_music)
-        current_music = nil
-    end
-
-    if game_state == 'title' then
-        local music_choice = math.random( #menu_music )
-        next_music = menu_music[music_choice]
-    elseif game_state ~= 'title' then
-        if characters.main_character.stats.death_status == nil then
-            local music_choice = math.random( #game_music )
-            next_music = game_music[music_choice]
-        else
-            next_music = death_sound
-        end
-    end
-
-
-    if next_music == nil then
-        return
-    end
-    next_music:play()
-    next_music:setLooping(true)
-    current_music = next_music
-end
 
 local updaters = {
     TimedUpdate:new(1, character_control.move_swordsman),
@@ -179,6 +126,7 @@ local updaters = {
     TimedUpdate:new(60, recover_health)
 }
 
+local background_music = music.BackgroundMusicManager:new()
 
 local time_total = 0
 function love.update(step_in_time)
@@ -186,13 +134,15 @@ function love.update(step_in_time)
         updater:update(step_in_time)
     end
     handle_status_updates()
-    update_music()
+
+    background_music:update(game_state, character_model.main_character:get_player_status())
 end
 
 
 function love.draw()
+    local ingame_renderer = render.IngameRenderer:new()
     if game_state == 'ingame' then
-        render.draw_ingame()
+        ingame_renderer:draw()
     elseif game_state == 'title' then
         render.draw_title()
     end

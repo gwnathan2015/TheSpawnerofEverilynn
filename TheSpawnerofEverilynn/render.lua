@@ -1,8 +1,21 @@
 local render = {}
 
-local characters = require('characters')
+local character_model = require('character.model')
 
-function render.draw_stats(stats, x, y)
+render.IngameRenderer = {}
+
+render.IngameRenderer.__index = render.IngameRenderer
+
+function render.IngameRenderer:new()
+    new_object = {
+    }
+    setmetatable(new_object, self)
+    new_object.__index = render.IngameRenderer
+    return new_object
+end
+
+
+function render.IngameRenderer:draw_stats(stats, x, y)
     local health = stats.current_health
     local max_health = stats.max_health
     local health_str = string.format( "PlayerHealth: %d/%d", health, max_health )
@@ -13,14 +26,9 @@ function render.draw_stats(stats, x, y)
     love.graphics.setColor({1,1,1,1})
 end
 
-if characters.main_characterstats.death_status ~= nil then
-	love.graphics.setColor({0.6, 0.15, 0.25, 1})
-	love.graphics.print("Press R to Respawn")
 
-	love.graphics.setcolor({1,1,1,1})
-end
 
-function render.draw_inventory(inventory, x, y)
+function render.IngameRenderer:draw_inventory(inventory, x, y)
     local coins = inventory.coins
     local coins_str = string.format( "Coins: %d", coins)
 
@@ -30,19 +38,32 @@ function render.draw_inventory(inventory, x, y)
     love.graphics.setColor({1,1,1,1})
 end
 
+function render.IngameRenderer:draw_death()
+    love.graphics.setColor({0.6, 0.15, 0.25, 1})
 
-function render.draw_ingame()
+    local death_font = love.graphics.newFont(30)
+    local respawn_text = love.graphics.newText(death_font, "Press R to Respawn")
+    love.graphics.draw(respawn_text, 20, 200)
+
+    love.graphics.setColor({1,1,1,1})
+end
+
+function render.IngameRenderer:draw()
     local col_number, row_number, row, x_c, y_c
     draw_map(game_map1, sprites)
-    characters.draw_characters(sprites)
+    character_model.draw_characters(sprites)
     draw_map_overlay(game_map1, sprites)
     local max_x = love.graphics.getWidth()
 
     local max_x = love.graphics.getWidth()
 
     
-    render.draw_stats(characters.main_character.stats, max_x - 250, 30 )
-    render.draw_inventory(characters.main_character.inventory, max_x - 250, 100)
+    self:draw_stats(character_model.main_character.stats, max_x - 250, 30 )
+    self:draw_inventory(character_model.main_character.inventory, max_x - 250, 100)
+
+    if character_model.main_character.stats.death_status ~= nil then
+        self:draw_death()
+    end
 end
 
 function render.draw_title()
@@ -51,7 +72,7 @@ function render.draw_title()
     local icon_width = iconimg:getPixelWidth()
     local icon_height = iconimg:getPixelHeight()
     --  |------------------------- window_width ---------------|
-    --  |                  |..icon_width*0.5.. |               |
+    --  |                  |.icon_width*0.5. |               |
     --  |                  <-------                            |
     --  |                         ^ window_width / 2           |
     local icon_x_offest_from_middle = icon_width / 2 / 2

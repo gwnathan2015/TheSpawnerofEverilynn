@@ -110,6 +110,16 @@ function characters.Character:respawn()
     end
 end
 
+function characters.Character:get_player_status()
+
+    if self.stats.death_status ~= nil then
+        return 'dead'
+    elseif self.stats.current_health > 40 then 
+        return "ok"
+    else
+        return "injured"
+    end
+end
 
 -- Moves the character around if possible, returns False if not. 
 --if yes then it moves when the player presses to move, if not, then it doesnt move there when the player presses to move

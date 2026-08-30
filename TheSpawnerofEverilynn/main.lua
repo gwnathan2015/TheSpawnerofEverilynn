@@ -3,14 +3,15 @@ local music = require("music")
 require ("map.map")
 local character_model = require ("character.model")
 local character_control = require("character.control")
-require("map.mapreader")
+local mapreader = require("map.mapreader")
 
 local utils = require('utils')
 local render = require('render')
 
 game_state = "title"
 
-game_map1 = read_map("ASSETS/maps/map1.json")
+local map_store = mapreader.MapStore:read_maps("ASSETS/maps/map1.json")
+game_map1 = map_store.maps.game_map1
 
 character_model.main_character = character_model.PlayerCharacter:new(
     "player", 
@@ -60,7 +61,7 @@ function love.load()
         sprites[i + 1000] = love.graphics.newImage(filename)
     end
 
-    love.window.setTitle("Spawner of Everilynn Pre-Alpha-1.8.5 V-3")
+    love.window.setTitle("Spawner of Everilynn Map Upd 2 PA-1.8.5 version.04")
     love.window.setMode(800, 600, {resizable=true, vsync=0, minwidth=400, minheight=300})
 
     local iconimg_data = love.image.newImageData("icon.png")
@@ -72,10 +73,10 @@ end
 local function deal_environmental_damage()
     for i, the_character in pairs(character_model.Character.all_characters) do
         local pos = the_character:pos()
-        local tile = game_map1[pos.y][pos.x]
+        local tile = game_map1.mapdata[pos.y][pos.x]
         if game_state == 'ingame' then
             if tile.u[1] == SPIKE then
-            the_character.stats:deal_damage(50)--math.random(1, 4))
+            the_character.stats:deal_damage(math.random(1, 4))
             end
         end
     end

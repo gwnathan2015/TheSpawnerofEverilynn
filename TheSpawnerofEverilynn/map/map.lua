@@ -1,5 +1,3 @@
-require("map.mapreader")
-
 local maps = {}
 
 maps.Map = {}
@@ -48,9 +46,9 @@ function maps.Object:new(name, sprite_num, x, y, z)
     return new_object
 end
 
-function maps.Object:draw()
-    local scaled_x = (self.x - 1) * 16
-    local scaled_y = (self.y - 1) * 16
+function maps.Object:draw(x_offset, y_offset)
+    local scaled_x = (self.x - 1) * 16 + x_offset
+    local scaled_y = (self.y - 1) * 16 + y_offset
     love.graphics.draw(sprites[self.sprite_num], scaled_x, scaled_y)
 end
 
@@ -83,12 +81,25 @@ function maps.TwoTileObject:new(name, sprite_num, upper_sprite_num, x, y, z)
 end
 
 
+maps.Map = {}
+
+maps.Map.__index = maps.Map
+
+function maps.Map:new(mapdata,name)
+    new_object = {
+        mapdata=mapdata,
+        name=name
+    }
+    setmetatable(new_object, self)
+    new_object.__index = maps.Map
+    return new_object
+end
 
 
 BUSH = 5 -- Object
 GREEN = 1 -- Tile
 FLOWERS = 2 -- Object 
-PATH = 25  -- Tile (floor)
+PATH = 25  -- Tile (flower)
 TREE_L = 15
 TREE_U = 3
 SPIKE = 1041
@@ -98,12 +109,12 @@ maps.bush_tile = maps.Object:new("bush", BUSH, 2, 2)
 maps.all_objects = {}
 table.insert(maps.all_objects, maps.bush_tile)
 
-function draw_map(game_map, sprites)
+function maps.draw_map(game_map, sprites, x_offset, y_offset)
     local col_number, row_number, row, x, y
-    for row_number, row in pairs(game_map) do
+    for row_number, row in pairs(game_map.mapdata) do
         for col_number, tile_info in pairs(row) do
-            x = (col_number - 1) * 16
-            y = (row_number - 1) * 16
+            x = (col_number - 1) * 16 + x_offset
+            y = (row_number - 1) * 16 + y_offset
             -- u: underlay of sprites
             -- o: overlay of sprites
             for depth, sprite_num in pairs(tile_info.u) do
@@ -113,11 +124,11 @@ function draw_map(game_map, sprites)
     end
 end
 
-function draw_map_overlay(game_map, sprites)
-    for row_number, row in pairs(game_map) do
+function maps.draw_map_overlay(game_map, sprites, x_offset, y_offset)
+    for row_number, row in pairs(game_map.mapdata) do
         for col_number, tile_info in pairs(row) do
-            x = (col_number - 1) * 16
-            y = (row_number - 1) * 16
+            x = (col_number - 1) * 16 + x_offset
+            y = (row_number - 1) * 16 + y_offset
             if tile_info.o ~= nil then
                 for depth, sprite_num in pairs(tile_info.o) do
                     love.graphics.draw(sprites[sprite_num], x, y)
@@ -127,6 +138,8 @@ function draw_map_overlay(game_map, sprites)
         end
     end
     for i, o in pairs(maps.all_objects) do
-        o:draw()
+        o:draw(x_offset, y_offset)
     end
 end
+
+return maps

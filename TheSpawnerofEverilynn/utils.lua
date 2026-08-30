@@ -13,5 +13,12 @@ function utils.setup_random()
     end
 end
 
+function utils.print_table(tab)
+    print('{')
+    for key, value in pairs(tab) do
+        print(string.format('  %s="%s"', key, tostring(value)))
+    end
+    print('}')
+end
 
 return utils

@@ -1,6 +1,7 @@
 local render = {}
 
 local character_model = require('character.model')
+local maps = require("map.map")
 
 render.IngameRenderer = {}
 
@@ -50,9 +51,10 @@ end
 
 function render.IngameRenderer:draw()
     local col_number, row_number, row, x_c, y_c
-    draw_map(game_map1, sprites)
-    character_model.draw_characters(sprites)
-    draw_map_overlay(game_map1, sprites)
+    maps.draw_map(game_map1, sprites, 0, 20)
+    
+    character_model.draw_characters(sprites, 0, 20)
+    maps.draw_map_overlay(game_map1, sprites, 0, 20)
     local max_x = love.graphics.getWidth()
 
     local max_x = love.graphics.getWidth()

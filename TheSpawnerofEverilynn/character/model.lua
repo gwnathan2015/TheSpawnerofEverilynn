@@ -135,8 +135,8 @@ function characters.Character:move(step_in_x, step_in_y)
 
     if future_x <= 0 then return false end
     if future_y <= 0 then return false end
-    if future_y > #(self.game_map) then return false end
-    if future_x > #(self.game_map[1]) then return false end
+    if future_y > #(self.game_map.mapdata) then return false end
+    if future_x > #(self.game_map.mapdata[1]) then return false end
 
     for num, character in pairs(characters.Character.all_characters) do
         if future_x == character.x and future_y == character.y then
@@ -148,7 +148,7 @@ function characters.Character:move(step_in_x, step_in_y)
         return false
     end
 
-    local future_cell = self.game_map[future_y][future_x]
+    local future_cell = self.game_map.mapdata[future_y][future_x]
     for index, sprite_num in pairs(future_cell.u) do
         if sprite_num == TREE_L then return false end
     end
@@ -170,9 +170,9 @@ function characters.Character:print()
 end
 
 -- Makes the character appear on a Love2d canvas.
-function characters.Character:draw(sprites)
-        local x_c = (self.x - 1) * 16
-        local y_c = (self.y - 1) * 16
+function characters.Character:draw(sprites, x_offset, y_offset)
+        local x_c = (self.x - 1) * 16 + x_offset
+        local y_c = (self.y - 1) * 16 + y_offset
         local c_sprite = self.sprite
         -- Draw character sprites
         love.graphics.draw(sprites[c_sprite], x_c, y_c)
@@ -233,9 +233,9 @@ function characters.PlayerCharacter:new(name, sprite, game_map, stats, x, y)
 end
 
 
-function characters.draw_characters(sprites)
+function characters.draw_characters(sprites, x_offset, y_offset)
     for num, character in pairs(characters.Character.all_characters) do
-        character:draw(sprites)
+        character:draw(sprites, x_offset, y_offset)
     end
 end
 

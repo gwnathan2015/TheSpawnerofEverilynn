@@ -1,6 +1,9 @@
 -- Map of tiles, corresponding to the tinydungen tile number.
-json = require("lib.json") 
+local json = require("lib.json") 
+local utils = require("utils")
+local maps = require("map.map")
 
+local mapreader = {}
 
 TILE_LOADER_MAP = {
     ["B"] = 5, -- Bush
@@ -13,14 +16,40 @@ TILE_LOADER_MAP = {
 
 }
 
-function read_map(filename)
+mapreader.MapStore = {}
+
+mapreader.MapStore.__index = mapreader.MapStore
+
+function mapreader.MapStore:new()
+    new_object = {
+        maps={}
+    }
+    setmetatable(new_object, self)
+    new_object.__index = mapreader.MapStore
+    return new_object
+end
+
+function mapreader.MapStore:read_maps(filename)
+    local store = mapreader.MapStore:new()
+
     local content = love.filesystem.read(filename)
     local config = json.decode(content)
-    game_map1 = {}
-    for row_index, row_str in pairs(config.game_map1) do 
+
+    local store_instance = mapreader.MapStore:new()
+    for map_id, raw_map_data in pairs(config) do
+        print('Loading map ',map_id)
+        local map_instance = self:_process_map(raw_map_data)
+        store_instance.maps[map_id] = map_instance
+    end
+    return store_instance
+end
+
+function mapreader.MapStore:_process_map(raw_map_data)
+    local mapdata = {}
+    for row_index, row_str in pairs(raw_map_data.map_data) do 
         -- row_str: "G   |G   |F   |G   |P   |P   |P   |G   |G   |F   "
-        row = {}
-        game_map1[row_index] = row
+        local row = {}
+        mapdata[row_index] = row
         local i = 1
         for cell_str,v in string.gmatch(row_str, "([^|]+)") do
             u1 = TILE_LOADER_MAP[string.sub(cell_str,1,1)]
@@ -37,8 +66,7 @@ function read_map(filename)
             i = i+1
         end
     end
-    return game_map1
+    return maps.Map:new(mapdata, raw_map_data.name)
 end
 
-print('game map loading finished')
-print(json.encode(game_map1))
+return mapreader

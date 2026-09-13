@@ -7,7 +7,7 @@ function character_control.swordsman_choose_destination()
     return character_model.main_character:pos()
 end
 
-function character_control.move_swordsman()
+function character_control.move_swordsman(game_map)
     local swordsman_destination_pos = character_control.swordsman_choose_destination()
     local swordsman_current_pos = character_model.swordsman:pos()
 
@@ -21,19 +21,19 @@ function character_control.move_swordsman()
     local step_in_y = utils.sign(difference_in_y)
     if game_state == 'ingame' then
          -- Only allows -1, 0, 1
-        character_model.swordsman:move(step_in_x, step_in_y)
+        character_model.swordsman:move(game_map, step_in_x, step_in_y)
     end
 end
 
-function character_control.move_main_character(key)
+function character_control.move_main_character(game_map, key)
     if key == "w" then
-        character_model.main_character:move(0, -1)
+        character_model.main_character:move(game_map, 0, -1)
     elseif key == "a" then
-        character_model.main_character:move(-1, 0)
+        character_model.main_character:move(game_map, -1, 0)
     elseif key == "s" then
-        character_model.main_character:move(0, 1)
+        character_model.main_character:move(game_map, 0, 1)
     elseif key == "d" then
-        character_model.main_character:move(1, 0)
+        character_model.main_character:move(game_map, 1, 0)
     elseif key == "r" then 
         character_model.main_character:respawn()
     elseif key == "c" then

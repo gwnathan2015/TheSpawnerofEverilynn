@@ -3,6 +3,9 @@ local render = {}
 local character_model = require('character.model')
 local maps = require("map.map")
 
+COLOR_GOLD = {1.0, 0.84, 0, 1}
+COLOR_HEALTH = {0.4,0.1,0.2,1}
+
 render.IngameRenderer = {}
 
 render.IngameRenderer.__index = render.IngameRenderer
@@ -21,7 +24,7 @@ function render.IngameRenderer:draw_stats(stats, x, y)
     local max_health = stats.max_health
     local health_str = string.format( "PlayerHealth: %d/%d", health, max_health )
 
-    love.graphics.setColor({0.4,0.1,0.2,1})
+    love.graphics.setColor(COLOR_HEALTH)
     love.graphics.print(health_str, x, y)
 
     love.graphics.setColor({1,1,1,1})
@@ -33,14 +36,14 @@ function render.IngameRenderer:draw_inventory(inventory, x, y)
     local coins = inventory.coins
     local coins_str = string.format( "Coins: %d", coins)
 
-    love.graphics.setColor({0.4,0.1,0.2,1})
+    love.graphics.setColor(COLOR_GOLD)
     love.graphics.print(coins_str, x, y)
 
     love.graphics.setColor({1,1,1,1})
 end
 
 function render.IngameRenderer:draw_death()
-    love.graphics.setColor({0.6, 0.15, 0.25, 1})
+    love.graphics.setColor(COLOR_HEALTH)
 
     local death_font = love.graphics.newFont(30)
     local respawn_text = love.graphics.newText(death_font, "Press R to Respawn")
@@ -52,13 +55,18 @@ end
 function render.IngameRenderer:draw()
     local col_number, row_number, row, x_c, y_c
     maps.draw_map(game_map1, sprites, 0, 20)
+
     
     character_model.draw_characters(sprites, 0, 20)
     maps.draw_map_overlay(game_map1, sprites, 0, 20)
     local max_x = love.graphics.getWidth()
 
-    local max_x = love.graphics.getWidth()
+    local gamefps_str = string.format("FPS: %0.2f f/sec", love.timer.getFPS())
+    
+    love.graphics.setColor(COLOR_GOLD)
+    love.graphics.print(gamefps_str, 0, 0)
 
+    love.graphics.setColor({1,1,1,1})
     
     self:draw_stats(character_model.main_character.stats, max_x - 250, 30 )
     self:draw_inventory(character_model.main_character.inventory, max_x - 250, 100)
@@ -66,6 +74,8 @@ function render.IngameRenderer:draw()
     if character_model.main_character.stats.death_status ~= nil then
         self:draw_death()
     end
+
+    
 end
 
 function render.draw_title()

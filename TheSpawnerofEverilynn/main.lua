@@ -12,20 +12,19 @@ game_state = "title"
 
 local map_store = mapreader.MapStore:read_maps("ASSETS/maps/map1.json")
 game_map1 = map_store.maps.game_map1
+game_map2 = map_store.maps.game_map2
 
 character_model.main_character = character_model.PlayerCharacter:new(
     "player", 
     1098, 
-    game_map1, 
     character_model.CharacterStats:new(100),
     2,
-    1
+    2
 )
 
 character_model.farmer = character_model.Character:new(
     "farmer", 
     1085, 
-    game_map1,
     character_model.CharacterStats:new(100),
     9,
     6
@@ -34,7 +33,6 @@ character_model.farmer = character_model.Character:new(
 character_model.wizard = character_model.Character:new(
     "wizard", 
     1084, 
-    game_map1,
     character_model.CharacterStats:new(100),
     10,
     2
@@ -43,7 +41,6 @@ character_model.wizard = character_model.Character:new(
 character_model.swordsman = character_model.Character:new(
     "Swordsman", 
     1097, 
-    game_map1,
     character_model.CharacterStats:new(120, 70),
     7,
     4
@@ -61,7 +58,7 @@ function love.load()
         sprites[i + 1000] = love.graphics.newImage(filename)
     end
 
-    love.window.setTitle("Spawner of Everilynn Map Upd 2 PA-1.8.5 version.04")
+    love.window.setTitle("Spawner of Everilynn Map Upd 2.1 PA1.8.5version.05")
     love.window.setMode(800, 600, {resizable=true, vsync=0, minwidth=400, minheight=300})
 
     local iconimg_data = love.image.newImageData("icon.png")
@@ -120,9 +117,12 @@ function recover_health()
 end
 
 
+function move_swordsman_wrapper()
+    character_control.move_swordsman(game_map1)
+end
 
 local updaters = {
-    TimedUpdate:new(1, character_control.move_swordsman),
+    TimedUpdate:new(1, move_swordsman_wrapper),
     TimedUpdate:new(1, deal_environmental_damage),
     TimedUpdate:new(60, recover_health)
 }
@@ -155,7 +155,7 @@ function love.keypressed(key, scancode, isrepeat)
     end
 
     if game_state == 'ingame' then
-        character_control.move_main_character(key)
+        character_control.move_main_character(game_map1, key)
     elseif game_state == 'title' then
         if key == "escape" then
             love.event.quit()

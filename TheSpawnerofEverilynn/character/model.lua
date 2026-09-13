@@ -79,7 +79,7 @@ characters.Character.__index = characters.Character
 --
 -- put name and sprite into the new character.
 -- Add the new character to the table list of all_characters.
-function characters.Character:new(name, sprite, game_map, stats, x, y)
+function characters.Character:new(name, sprite, stats, x, y)
     if x == nil then
         x = 0
     end
@@ -89,7 +89,6 @@ function characters.Character:new(name, sprite, game_map, stats, x, y)
     local new_object = {
         sprite = sprite, 
         name = name, 
-        game_map = game_map,
         stats = stats,
         x = x, start_x = x,
         y = y, start_y = y,
@@ -128,15 +127,15 @@ end
 -- @param step_in_x -- Movement in x direction, relative to current position,
 -- @param step_in_y -- Movement in y direction, relative to current position,
 -- @return True if the move was allowed and completed.
-function characters.Character:move(step_in_x, step_in_y)
+function characters.Character:move(game_map, step_in_x, step_in_y)
 
     local future_x = self.x + step_in_x
     local future_y = self.y + step_in_y
 
     if future_x <= 0 then return false end
     if future_y <= 0 then return false end
-    if future_y > #(self.game_map.mapdata) then return false end
-    if future_x > #(self.game_map.mapdata[1]) then return false end
+    if future_y > #(game_map.mapdata) then return false end
+    if future_x > #(game_map.mapdata[1]) then return false end
 
     for num, character in pairs(characters.Character.all_characters) do
         if future_x == character.x and future_y == character.y then
@@ -148,7 +147,7 @@ function characters.Character:move(step_in_x, step_in_y)
         return false
     end
 
-    local future_cell = self.game_map.mapdata[future_y][future_x]
+    local future_cell = game_map.mapdata[future_y][future_x]
     for index, sprite_num in pairs(future_cell.u) do
         if sprite_num == TREE_L then return false end
     end
@@ -217,11 +216,10 @@ function characters.PlayerCharacter:remove_coins(value)
     end
 end
 
-function characters.PlayerCharacter:new(name, sprite, game_map, stats, x, y)
+function characters.PlayerCharacter:new(name, sprite, stats, x, y)
     local new_object = characters.Character:new(
     name, 
     sprite, 
-    game_map, 
     stats, 
     x, 
     y)

@@ -104,7 +104,7 @@ TREE_L = 15
 TREE_U = 3
 SPIKE = 1041
 
-maps.bush_tile = maps.Object:new("bush", BUSH, 2, 2)
+maps.bush_tile = maps.Object:new("bush", BUSH, 2, 3)
 
 maps.all_objects = {}
 table.insert(maps.all_objects, maps.bush_tile)
